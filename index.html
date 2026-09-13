@@ -899,7 +899,7 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-900 mb-1">Lokasi Pengawasan</label>
-                            <input type="text" id="sppgLokasi" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Contoh: Toko Pangan Sehat">
+                            <input type="text" id="sppgLokasi" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Contoh: SPPG Sirimau">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-900 mb-1">Kecamatan</label>
@@ -1194,15 +1194,15 @@
                 <p class="text-slate-900">Masukkan URL Web App Google Apps Script agar setiap data input otomatis terekam di Google Spreadsheet dan Google Drive.</p>
                 <div>
                     <label class="block text-xs font-bold text-slate-900 mb-1">Google Apps Script Web App URL</label>
-                    <input type="text" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/AKfycbyNFyzi4NQ0fSO8ThyqBAr_KoT7GJGu56ZtP9841xV8cXZfgvzx9LbMul-7dkDAUMj4/exec" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-amber-600">
+                    <input type="text" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-amber-600">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-900 mb-1">Link Google Spreadsheet</label>
-                    <input type="text" id="sheetUrlInput" placeholder="https://docs.google.com/spreadsheets/d/1UhxcvYB2Tmp6bCeAlpc3ESJRLpNLsWYT6WZ3d6ukubo/edit?gid=1214040022#gid=1214040022" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-amber-600">
+                    <input type="text" id="sheetUrlInput" placeholder="https://docs.google.com/spreadsheets/d/..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-amber-600">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-900 mb-1">Link Google Drive Folder</label>
-                    <input type="text" id="driveUrlInput" placeholder="https://drive.google.com/drive/folders/1le1AOxSU-Y7j1t2zdjKuJHh4nKrvTiVg" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-amber-600">
+                    <input type="text" id="driveUrlInput" placeholder="https://drive.google.com/drive/folders/..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-amber-600">
                 </div>
             </div>
             <div class="flex justify-end gap-3 pt-4 border-t border-slate-300">
@@ -1262,7 +1262,27 @@
             initSettingsUI();
             updateAdminUI();
             renderAll();
+            fetchDataFromGoogleSheet(); // Auto tarik data dari Spreadsheet agar perangkat manapun selalu terupdate
         });
+
+        // Fungsi tambahan aman untuk menarik data dari Spreadsheet secara otomatis lintas device
+        async function fetchDataFromGoogleSheet() {
+            const scriptUrl = dbState.settings.scriptUrl;
+            if(!scriptUrl) return;
+            try {
+                const response = await fetch(scriptUrl);
+                const result = await response.json();
+                if(result && result.status === 'success' && result.data) {
+                    if(result.data.gudang) { dbState.gudang = result.data.gudang; localStorage.setItem('sipensil_gudang', JSON.stringify(dbState.gudang)); }
+                    if(result.data.label) { dbState.label = result.data.label; localStorage.setItem('sipensil_label', JSON.stringify(dbState.label)); }
+                    if(result.data.pestisida) { dbState.pestisida = result.data.pestisida; localStorage.setItem('sipensil_pestisida', JSON.stringify(dbState.pestisida)); }
+                    if(result.data.sppg) { dbState.sppg = result.data.sppg; localStorage.setItem('sipensil_sppg', JSON.stringify(dbState.sppg)); }
+                    renderAll();
+                }
+            } catch (e) {
+                console.log("Menggunakan data lokal tersimpan (Offline/Belum ada koneksi API doGet).");
+            }
+        }
 
         function updateAdminUI() {
             const adminDesktop = document.getElementById('adminMenuDesktop');
@@ -1287,7 +1307,6 @@
                 authBtnMobile.innerHTML = `<i data-lucide="lock" class="w-5 h-5"></i>`;
                 authBtnMobile.className = "p-2 rounded-xl bg-slate-800 text-white";
                 
-                // Jika sedang tidak login dan berada di tab selain dashboard, kembalikan ke dashboard
                 const activeTab = document.querySelector('.tab-content:not(.hidden)').id;
                 if(activeTab !== 'tab-dashboard') {
                     switchTab('dashboard');
@@ -1304,7 +1323,6 @@
                 switchTab('dashboard');
                 showToast('Berhasil Logout dari Admin.');
             } else {
-                // Membuka modal login password tersembunyi (tidak menggunakan prompt agar teks tertutup titik-titik)
                 document.getElementById('adminPasswordInput').value = '';
                 document.getElementById('oldPasswordInput').value = '';
                 document.getElementById('newPasswordInput').value = '';
@@ -1396,10 +1414,10 @@
             initSettingsUI();
             closeSettingsModal();
             showToast('Pengaturan sinkronisasi berhasil disimpan!');
+            fetchDataFromGoogleSheet();
         }
 
         function switchTab(tabName) {
-            // Batasi akses menu selain dashboard jika belum login admin
             if(tabName !== 'dashboard' && !isAdminLoggedIn) {
                 alert('Akses ditolak! Menu ini khusus untuk Admin. Silakan Login Admin terlebih dahulu.');
                 return;
@@ -1421,7 +1439,6 @@
             }
         }
 
-        // Fungsi baru untuk melakukan filter otomatis di Data Pengawasan / Rekap berdasarkan status statistik yang diklik
         function filterByStat(kesimpulan) {
             if (!isAdminLoggedIn) {
                 alert('Akses ditolak! Menu rekap khusus untuk Admin. Silakan Login Admin terlebih dahulu.');
@@ -1597,7 +1614,6 @@
             }, 3000);
         }
 
-        // Helper untuk convert file gambar ke Base64 agar dapat disimpan di localStorage & Spreadsheet
         async function convertFilesToBase64(fileInputId) {
             const fileInput = document.getElementById(fileInputId);
             if(!fileInput || fileInput.files.length === 0) return [];
@@ -1612,7 +1628,6 @@
             return await Promise.all(promises);
         }
 
-        // Simpan Data Gudang
         async function saveGudang(e) {
             e.preventDefault();
             const id = document.getElementById('gudangId').value || 'GDG-' + Date.now();
@@ -1650,7 +1665,6 @@
             syncToGoogleSheet(dataObj);
         }
 
-        // Simpan Data Label
         async function saveLabel(e) {
             e.preventDefault();
             const id = document.getElementById('labelId').value || 'LBL-' + Date.now();
@@ -1690,7 +1704,6 @@
             syncToGoogleSheet(dataObj);
         }
 
-        // Simpan Data Pestisida
         async function savePestisida(e) {
             e.preventDefault();
             const id = document.getElementById('pestisidaId').value || 'PST-' + Date.now();
@@ -1726,7 +1739,6 @@
             syncToGoogleSheet(dataObj);
         }
 
-        // Simpan Data SPPG
         async function saveSppg(e) {
             e.preventDefault();
             const id = document.getElementById('sppgId').value || 'SPPG-' + Date.now();
@@ -1764,7 +1776,6 @@
             syncToGoogleSheet(dataObj);
         }
 
-        // Hapus Data
         function deleteData(type, id) {
             if(!isAdminLoggedIn) {
                 alert('Akses ditolak! Penghapusan data memerlukan hak akses Admin.');
@@ -1786,7 +1797,6 @@
             }
         }
 
-        // Sinkronisasi ke Google Apps Script (jika URL diisi)
         function syncToGoogleSheet(data) {
             const scriptUrl = dbState.settings.scriptUrl;
             if(!scriptUrl) return;
@@ -1803,7 +1813,6 @@
             });
         }
 
-        // Render seluruh tabel dan statistik
         function renderAll() {
             renderGudangTable();
             renderLabelTable();
@@ -2078,7 +2087,6 @@
             document.getElementById('percentAman').innerText = percentAman + '%';
             document.getElementById('percentTidakAman').innerText = percentTidakAman + '%';
 
-            // Hitung fokus wilayah terbanyak
             const kecCounts = {};
             const allItems = [...dbState.gudang, ...dbState.label, ...dbState.pestisida, ...dbState.sppg];
             allItems.forEach(i => {
@@ -2099,7 +2107,6 @@
         }
 
         function renderCharts() {
-            // Chart Gudang
             const gudangAman = dbState.gudang.filter(x => x.kesimpulan === 'Memenuhi Syarat').length;
             const gudangTidak = dbState.gudang.filter(x => x.kesimpulan === 'Tidak Memenuhi Syarat').length;
             if(chartsInstance.pieGudang) chartsInstance.pieGudang.destroy();
@@ -2112,7 +2119,6 @@
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } } }
             });
 
-            // Chart Label
             const labelAman = dbState.label.filter(x => x.kesimpulan === 'Memenuhi Syarat').length;
             const labelTidak = dbState.label.filter(x => x.kesimpulan === 'Tidak Memenuhi Syarat').length;
             if(chartsInstance.pieLabel) chartsInstance.pieLabel.destroy();
@@ -2125,7 +2131,6 @@
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } } }
             });
 
-            // Chart Pestisida
             const pestAman = dbState.pestisida.filter(x => x.kesimpulan === 'Memenuhi Syarat').length;
             const pestTidak = dbState.pestisida.filter(x => x.kesimpulan === 'Tidak Memenuhi Syarat').length;
             if(chartsInstance.piePestisida) chartsInstance.piePestisida.destroy();
@@ -2138,7 +2143,6 @@
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } } }
             });
 
-            // Chart SPPG
             const sppgAman = dbState.sppg.filter(x => x.kesimpulan === 'Memenuhi Syarat').length;
             const sppgTidak = dbState.sppg.filter(x => x.kesimpulan === 'Tidak Memenuhi Syarat').length;
             if(chartsInstance.pieSppg) chartsInstance.pieSppg.destroy();
@@ -2151,7 +2155,6 @@
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } } }
             });
 
-            // Bar Chart
             if(chartsInstance.bar) chartsInstance.bar.destroy();
             chartsInstance.bar = new Chart(document.getElementById('barChart'), {
                 type: 'bar',
