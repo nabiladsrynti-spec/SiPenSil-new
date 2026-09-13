@@ -13,7 +13,6 @@
     <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-       <style>
     body { font-family: 'Inter', sans-serif; }
     .bg-slider {
         position: fixed;
@@ -32,12 +31,15 @@
         opacity: 1;
     }
 </style>
+</head>
+<body class="min-h-screen flex flex-col">
     <!-- Background Slideshow of Vegetables & Fruits -->
-<div class="bg-slider active" style="background-image: url('rempah.png');"></div>
-<div class="bg-slider" style="background-image: url('sayur.png');"></div>
-<div class="bg-slider" style="background-image: url('buah.png');"></div>
-<div class="bg-slider" style="background-image: url('cabai.png');"></div>
-<div class="absolute inset-0 bg-[#FFFFF0]/20 z-[-1]"></div>
+    <div class="bg-slider active" style="background-image: url('rempah.png');"></div>
+    <div class="bg-slider" style="background-image: url('sayur.png');"></div>
+    <div class="bg-slider" style="background-image: url('buah.png');"></div>
+    <div class="bg-slider" style="background-image: url('cabai.png');"></div>
+    <div class="absolute inset-0 bg-[#FFFFF0]/20 z-[-1]"></div>
+    
     <!-- Header / Navbar -->
     <header class="bg-[#FAF9F6]/40 backdrop-blur-md border-b border-slate-300 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -52,29 +54,38 @@
                         SiPenSil <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">PSAT</span>
                     </h1>
                     <p class="text-xs text-slate-900 font-semibold">Dinas Pertanian dan Ketahanan Pangan</p>
-				
 					<p class="text-xs text-slate-900 font-semibold">Kota Ambon</p>
                 </div>
             </div>
             <!-- Desktop Navigation -->
             <nav class="hidden lg:flex items-center space-x-1">
                 <button onclick="switchTab('dashboard')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold transition text-emerald-700 bg-emerald-100/80 border border-emerald-300" data-target="Beranda">Beranda</button>
-                <button onclick="switchTab('gudang')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold transition text-slate-900 hover:text-black hover:bg-slate-200" data-target="gudang">Gudang PSAT</button>
-                <button onclick="switchTab('pestisida')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold transition text-slate-900 hover:text-black hover:bg-slate-200" data-target="pestisida">Pengujian Pestisida</button>
-                <button onclick="switchTab('sppg')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold transition text-slate-900 hover:text-black hover:bg-slate-200" data-target="sppg">Pengawasan SPPG</button>
-                <button onclick="switchTab('rekap')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold transition text-slate-900 hover:text-black hover:bg-slate-200" data-target="rekap">Data Pengawasan</button>
-                <a id="sheetLinkNav" href="https://docs.google.com/spreadsheets/d/1UhxcvYB2Tmp6bCeAlpc3ESJRLpNLsWYT6WZ3d6ukubo/edit?gid=1386317959#gid=1386317959" target="_blank" class="px-3 py-2 rounded-xl text-sm font-semibold transition text-slate-900 hover:text-black hover:bg-slate-200 flex items-center gap-1.5">
-                </a>
-                <a id="driveLinkNav" href="https://drive.google.com/drive/folders/1le1AOxSU-Y7j1t2zdjKuJHh4nKrvTiVg" target="_blank" class="px-3 py-2 rounded-xl text-sm font-semibold transition text-slate-900 hover:text-black hover:bg-slate-200 flex items-center gap-1.5">
-                </a>
-                <button onclick="openSettingsModal()" class="px-3 py-2 rounded-xl text-sm font-semibold transition text-amber-800 hover:bg-amber-100 border border-amber-300 flex items-center gap-1.5" title="Integrasi Apps Script">
-                    <i data-lucide="settings" class="w-4 h-4"></i> Sinkronisasi
+                
+                <!-- Menu Khusus Admin (Disembunyikan jika belum login admin) -->
+                <div id="adminMenuDesktop" class="hidden items-center space-x-1">
+                    <button onclick="switchTab('gudang')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold transition text-slate-900 hover:text-black hover:bg-slate-200" data-target="gudang">Gudang PSAT</button>
+                    <button onclick="switchTab('label')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold transition text-slate-900 hover:text-black hover:bg-slate-200" data-target="label">Pengawasan Label</button>
+                    <button onclick="switchTab('pestisida')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold transition text-slate-900 hover:text-black hover:bg-slate-200" data-target="pestisida">Pengujian Pestisida</button>
+                    <button onclick="switchTab('sppg')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold transition text-slate-900 hover:text-black hover:bg-slate-200" data-target="sppg">Pengawasan SPPG</button>
+                    <button onclick="switchTab('rekap')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold transition text-slate-900 hover:text-black hover:bg-slate-200" data-target="rekap">Data Pengawasan</button>
+                    <a id="sheetLinkNav" href="https://docs.google.com/spreadsheets/d/1UhxcvYB2Tmp6bCeAlpc3ESJRLpNLsWYT6WZ3d6ukubo/edit?gid=1386317959#gid=1386317959" target="_blank" class="px-3 py-2 rounded-xl text-sm font-semibold transition text-slate-900 hover:text-black hover:bg-slate-200 flex items-center gap-1.5">
+                    </a>
+                    <a id="driveLinkNav" href="https://drive.google.com/drive/folders/1le1AOxSU-Y7j1t2zdjKuJHh4nKrvTiVg" target="_blank" class="px-3 py-2 rounded-xl text-sm font-semibold transition text-slate-900 hover:text-black hover:bg-slate-200 flex items-center gap-1.5">
+                    </a>
+                    <button onclick="openSettingsModal()" class="px-3 py-2 rounded-xl text-sm font-semibold transition text-amber-800 hover:bg-amber-100 border border-amber-300 flex items-center gap-1.5" title="Integrasi Apps Script">
+                        <i data-lucide="settings" class="w-4 h-4"></i> Sinkronisasi
+                    </button>
+                </div>
+
+                <!-- Tombol Login / Logout Admin -->
+                <button id="adminAuthBtn" onclick="handleAdminAuth()" class="ml-2 px-3.5 py-2 rounded-xl text-sm font-bold transition bg-slate-800 text-white hover:bg-slate-700 flex items-center gap-1.5">
+                    <i data-lucide="lock" class="w-4 h-4"></i> Login Admin
                 </button>
             </nav>
             <!-- Mobile Menu Toggle -->
             <div class="flex items-center gap-2 lg:hidden">
-                <button onclick="openSettingsModal()" class="p-2 rounded-xl bg-amber-100 text-amber-800 border border-amber-300">
-                    <i data-lucide="settings" class="w-5 h-5"></i>
+                <button id="adminAuthBtnMobile" onclick="handleAdminAuth()" class="p-2 rounded-xl bg-slate-800 text-white">
+                    <i data-lucide="lock" class="w-5 h-5"></i>
                 </button>
                 <button onclick="toggleMobileMenu()" class="p-2 rounded-xl bg-slate-200 text-slate-900">
                     <i data-lucide="menu" class="w-6 h-6"></i>
@@ -84,16 +95,23 @@
         <!-- Mobile Dropdown Menu -->
         <div id="mobileMenu" class="hidden lg:hidden bg-[#FAF9F6] border-b border-slate-300 px-4 pt-2 pb-4 space-y-1">
             <button onclick="switchTab('dashboard'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-emerald-700 bg-emerald-100">Dashboard</button>
-            <button onclick="switchTab('gudang'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-slate-200">Gudang PSAT</button>
-            <button onclick="switchTab('pestisida'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-slate-200">Pengujian Pestisida</button>
-            <button onclick="switchTab('sppg'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-slate-200">Pengawasan SPPG</button>
-            <button onclick="switchTab('rekap'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-slate-200">Data Pengawasan</button>
-            <a id="sheetLinkNavMobile" href="https://docs.google.com/spreadsheets" target="_blank" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-slate-200 flex items-center gap-2">
-                <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-600"></i> Buka Spreadsheet
-            </a>
-            <a id="driveLinkNavMobile" href="https://drive.google.com" target="_blank" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-slate-200 flex items-center gap-2">
-                <i data-lucide="folder" class="w-4 h-4 text-sky-600"></i> Buka GDrive
-            </a>
+            
+            <div id="adminMenuMobile" class="hidden space-y-1">
+                <button onclick="switchTab('gudang'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-slate-200">Gudang PSAT</button>
+                <button onclick="switchTab('label'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-slate-200">Pengawasan Label</button>
+                <button onclick="switchTab('pestisida'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-slate-200">Pengujian Pestisida</button>
+                <button onclick="switchTab('sppg'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-slate-200">Pengawasan SPPG</button>
+                <button onclick="switchTab('rekap'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-slate-200">Data Pengawasan</button>
+                <button onclick="openSettingsModal(); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-amber-800 hover:bg-amber-100 flex items-center gap-2">
+                    <i data-lucide="settings" class="w-4 h-4 text-amber-700"></i> Sinkronisasi
+                </button>
+                <a id="sheetLinkNavMobile" href="https://docs.google.com/spreadsheets" target="_blank" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-slate-200 flex items-center gap-2">
+                    <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-600"></i> Buka Spreadsheet
+                </a>
+                <a id="driveLinkNavMobile" href="https://drive.google.com" target="_blank" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-slate-200 flex items-center gap-2">
+                    <i data-lucide="folder" class="w-4 h-4 text-sky-600"></i> Buka GDrive
+                </a>
+            </div>
         </div>
     </header>
 
@@ -106,7 +124,7 @@
                 <div>
                     <span class="text-xs uppercase tracking-widest text-emerald-800 font-bold bg-emerald-200/60 px-3 py-1 rounded-full border border-emerald-300">Sistem Pendataan Hasil Pengawasan Keamanan PSAT</span>
                     <h2 class="text-2xl sm:text-3xl font-bold text-slate-950 mt-3">Pengawasan Keamanan PSAT Kota Ambon</h2>
-                    <p class="text-slate-900 text-sm mt-2 max-w-2xl font-medium">Dashboard hasil pengawasan Gudang PSAT, Pengujian Pestisida Rapid Test, dan SPPG di wilayah Kota Ambon.</p>
+                    <p class="text-slate-900 text-sm mt-2 max-w-2xl font-medium">Dashboard hasil pengawasan Gudang PSAT, Pengawasan Label PSAT, Pengujian Pestisida Rapid Test, dan SPPG di wilayah Kota Ambon.</p>
                 </div>
             </div>
 
@@ -128,7 +146,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-slate-300 shadow-md relative overflow-hidden group hover:border-emerald-500 transition">
+                <div onclick="filterByStat('Memenuhi Syarat')" class="bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-slate-300 shadow-md relative overflow-hidden group hover:border-emerald-500 transition cursor-pointer" title="Klik untuk melihat data Memenuhi Syarat">
                     <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-emerald-0 rounded-full group-hover:scale-125 transition"></div>
                     <div class="flex items-center justify-between">
                         <div>
@@ -140,11 +158,11 @@
                         </div>
                     </div>
                     <div class="mt-4 flex items-center text-xs text-slate-900 font-medium">
-                        <span id="percentAman" class="text-emerald-700 font-black mr-1">0%</span> dari total pengawasan
+                        <span id="percentAman" class="text-emerald-700 font-black mr-1">0%</span> dari total pengawasan (Klik detail)
                     </div>
                 </div>
 
-                <div class="bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-slate-300 shadow-md relative overflow-hidden group hover:border-rose-500 transition">
+                <div onclick="filterByStat('Tidak Memenuhi Syarat')" class="bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-slate-300 shadow-md relative overflow-hidden group hover:border-rose-500 transition cursor-pointer" title="Klik untuk melihat data Tidak Memenuhi Syarat">
                     <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-rose-0 rounded-full group-hover:scale-125 transition"></div>
                     <div class="flex items-center justify-between">
                         <div>
@@ -156,7 +174,7 @@
                         </div>
                     </div>
                     <div class="mt-4 flex items-center text-xs text-slate-900 font-medium">
-                        <span id="percentTidakAman" class="text-rose-700 font-black mr-1">0%</span> perlu pembinaan
+                        <span id="percentTidakAman" class="text-rose-700 font-black mr-1">0%</span> perlu pembinaan (Klik detail)
                     </div>
                 </div>
 
@@ -179,7 +197,7 @@
 
             <!-- Charts Section -->
             <div class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-slate-300 shadow-md flex flex-col">
                         <div class="flex items-center justify-between mb-4">
                             <h4 class="text-sm font-bold text-slate-950 flex items-center gap-2">
@@ -188,6 +206,17 @@
                         </div>
                         <div class="relative flex-1 min-h-[220px] flex items-center justify-center">
                             <canvas id="pieChartGudang"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-slate-300 shadow-md flex flex-col">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-sm font-bold text-slate-950 flex items-center gap-2">
+                                <i data-lucide="tag" class="w-4 h-4 text-emerald-600"></i> Pengawasan Label
+                            </h4>
+                        </div>
+                        <div class="relative flex-1 min-h-[220px] flex items-center justify-center">
+                            <canvas id="pieChartLabel"></canvas>
                         </div>
                     </div>
 
@@ -227,7 +256,7 @@
             </div>
         </section>
 
-        <!-- ==================== TAB 2: GUDANG PSAT ==================== -->
+        <!-- ==================== TAB 2: GUDANG PSAT (KHUSUS ADMIN) ==================== -->
         <section id="tab-gudang" class="tab-content hidden space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-slate-300 shadow-md">
                 <div>
@@ -259,7 +288,40 @@
             </div>
         </section>
 
-        <!-- ==================== TAB 3: PENGUJIAN PESTISIDA ==================== -->
+        <!-- ==================== TAB: PENGAWASAN LABEL PSAT (KHUSUS ADMIN) ==================== -->
+        <section id="tab-label" class="tab-content hidden space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-slate-300 shadow-md">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-950 flex items-center gap-2">
+                        <i data-lucide="tag" class="w-6 h-6 text-emerald-600"></i> Pengawasan Label PSAT
+                    </h2>
+                    <p class="text-slate-900 text-sm mt-1 font-medium">Kelola data pengawasan label produk pangan segar asal tumbuhan (PSAT) di peredaran.</p>
+                </div>
+                <button onclick="openModal('label')" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition flex items-center gap-2 shadow-md">
+                    <i data-lucide="plus-circle" class="w-5 h-5"></i> Tambah Pengawasan Label
+                </button>
+            </div>
+
+            <div class="bg-white/90 backdrop-blur-md rounded-2xl border border-slate-300 shadow-md overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-200 text-slate-950 text-xs uppercase font-bold tracking-wider border-b border-slate-300">
+                                <th class="p-4">Tanggal & Petugas</th>
+                                <th class="p-4">Nama Dagang & Produsen</th>
+                                <th class="p-4">Lokasi & Kecamatan</th>
+                                <th class="p-4">Kesimpulan</th>
+                                <th class="p-4">Dokumentasi</th>
+                                <th class="p-4 text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableLabel" class="divide-y divide-slate-200 text-sm font-medium"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 3: PENGUJIAN PESTISIDA (KHUSUS ADMIN) ==================== -->
         <section id="tab-pestisida" class="tab-content hidden space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-slate-300 shadow-md">
                 <div>
@@ -292,7 +354,7 @@
             </div>
         </section>
 
-        <!-- ==================== TAB 4: PENGAWASAN SPPG ==================== -->
+        <!-- ==================== TAB 4: PENGAWASAN SPPG (KHUSUS ADMIN) ==================== -->
         <section id="tab-sppg" class="tab-content hidden space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-slate-300 shadow-md">
                 <div>
@@ -324,7 +386,7 @@
             </div>
         </section>
 
-        <!-- ==================== TAB 5: DATA PENGAWASAN (REKAP) ==================== -->
+        <!-- ==================== TAB 5: DATA PENGAWASAN / REKAP (KHUSUS ADMIN) ==================== -->
         <section id="tab-rekap" class="tab-content hidden space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-slate-300 shadow-md">
                 <div>
@@ -334,7 +396,7 @@
                     <p class="text-slate-900 text-sm mt-1 font-medium">Integrasi langsung ke Google Spreadsheet & Google Drive Dinas Pertanian Kota Ambon.</p>
                 </div>
                <div class="flex flex-wrap gap-3">
-    <a id="sheetLinkBtn2" href="https://docs.google.com/spreadsheets/d/1UhxcvYB2Tmp6bCeAlpc3ESJRLpNLsWYT3d6ukubo/edit?gid=1386317959" target="_blank" class="px-4 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium inline-flex items-center gap-2 transition">
+    <a id="sheetLinkBtn2" href="https://docs.google.com/spreadsheets/d/1UhxcvYB2Tmp6bCeAlpc3ESJRLpNLsWYT6WZ3d6ukubo/edit?gid=1386317959" target="_blank" class="px-4 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium inline-flex items-center gap-2 transition">
         <i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Buka Spreadsheet
     </a>
     <a id="drivelinkBtn" href="https://drive.google.com/drive/folders/1le1AOxSU-Y7j1t2zdjKuJHh4nKrvTiVg" target="_blank" class="px-4 py-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 font-medium inline-flex items-center gap-2 transition">
@@ -400,7 +462,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-900 mb-1">Nama Petugas</label>
-                            <input type="text" id="gudangPetugas" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Nama lengkap petugas">
+                            <input type="text" id="gudangPetugas" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Nama lengkap petugas">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-900 mb-1">Tanggal Pengawasan</label>
@@ -408,7 +470,7 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-900 mb-1">Lokasi Pengawasan (Nama Gudang/Usaha)</label>
-                            <input type="text" id="gudangLokasi" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Contoh: Gudang Toko Tani Sejahtera">
+                            <input type="text" id="gudangLokasi" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Contoh: Gudang Toko Tani Sejahtera">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-900 mb-1">Kecamatan</label>
@@ -559,19 +621,140 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-900 mb-1">Dokumentasi (Kamera HP / Galeri - Bisa Unggah Banyak Foto)</label>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Dokumentasi</label>
                             <input type="file" id="gudangFoto" multiple accept="image/*" capture="environment" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700">
                             <span class="text-[11px] text-slate-700 mt-1 block font-medium">Foto tersimpan otomatis ke Spreadsheet & Google Drive.</span>
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-900 mb-1">Catatan (Isi Teks Saja)</label>
-                        <textarea id="gudangCatatan" rows="3" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Tuliskan catatan atau rekomendasi pembinaan..."></textarea>
+                        <label class="block text-xs font-bold text-slate-900 mb-1">Catatan </label>
+                        <textarea id="gudangCatatan" rows="3" autocomplete="off" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Tuliskan catatan atau rekomendasi pembinaan..."></textarea>
                     </div>
                 </div>
 
                 <div class="flex justify-end gap-3 pt-4 border-t border-slate-300">
                     <button type="button" onclick="closeModal('gudang')" class="px-5 py-2.5 rounded-xl bg-slate-200 text-slate-900 hover:bg-slate-300 text-sm font-bold">Batal</button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold shadow-md">Simpan Data</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL FORM PENGAWASAN LABEL PSAT ==================== -->
+    <div id="modalLabel" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm overflow-y-auto flex items-center justify-center p-4">
+        <div class="bg-[#FAF9F6] border border-emerald-400 w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden my-8">
+            <div class="bg-emerald-100 px-6 py-4 border-b border-slate-300 flex items-center justify-between">
+                <h3 id="titleModalLabel" class="text-lg font-bold text-slate-950 flex items-center gap-2">
+                    <i data-lucide="tag" class="w-5 h-5 text-emerald-700"></i> <span id="titleModalLabelText">Form Pengawasan Label PSAT</span>
+                </h3>
+                <button onclick="closeModal('label')" class="text-slate-700 hover:text-black p-1 rounded-lg">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <form id="formLabel" onsubmit="saveLabel(event)" class="p-6 space-y-6 max-h-[75vh] overflow-y-auto text-slate-950">
+                <input type="hidden" id="labelId">
+                
+                <!-- 1. Detail Pengawasan -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-bold text-emerald-800 uppercase tracking-wider border-b border-slate-300 pb-2">1. Detail Pengawasan</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Nama Petugas</label>
+                            <input type="text" id="labelPetugas" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Nama lengkap petugas">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Tanggal Pengawasan</label>
+                            <input type="date" id="labelTanggal" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Lokasi Pengawasan</label>
+                            <input type="text" id="labelLokasi" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Contoh: Toko / Pasar...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Kecamatan</label>
+                            <select id="labelKecamatan" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600">
+                                <option value="Sirimau">Sirimau</option>
+                                <option value="Nusaniwe">Nusaniwe</option>
+                                <option value="Baguala">Baguala</option>
+                                <option value="Teluk Ambon">Teluk Ambon</option>
+                                <option value="Leitimur Selatan">Leitimur Selatan</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Input Pengawasan -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-bold text-emerald-800 uppercase tracking-wider border-b border-slate-300 pb-2">2. Input Pengawasan Label</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Jenis PSAT</label>
+                            <input type="text" id="labelJenisPsat" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Contoh: Beras, Buah, Sayur...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Nama Dagang</label>
+                            <input type="text" id="labelNamaDagang" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Nama produk / merek">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Nama Produsen</label>
+                            <input type="text" id="labelNamaProdusen" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Nama perusahaan / produsen">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Alamat Produsen</label>
+                            <input type="text" id="labelAlamatProdusen" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Alamat lengkap produsen">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">No. Registrasi / Izin Edar</label>
+                            <select id="labelNoRegistrasi" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600">
+                                <option value="Ada">Ada</option>
+                                <option value="Tidak">Tidak</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Klaim (Jika ada)</label>
+                            <input type="text" id="labelKlaim" autocomplete="off" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Klaim produk (opsional)">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Tanggal Produksi</label>
+                            <select id="labelTglProduksi" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600">
+                                <option value="Ada">Ada</option>
+                                <option value="Tidak">Tidak</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Tanggal Kadaluwarsa</label>
+                            <select id="labelTglKadaluwarsa" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600">
+                                <option value="Ada">Ada</option>
+                                <option value="Tidak">Tidak</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Kesesuaian</label>
+                            <select id="labelKesesuaian" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600">
+                                <option value="Sesuai">Sesuai</option>
+                                <option value="Tidak">Tidak</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Kesimpulan</label>
+                            <select id="labelKesimpulan" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600">
+                                <option value="Memenuhi Syarat">Memenuhi Syarat</option>
+                                <option value="Tidak Memenuhi Syarat">Tidak Memenuhi Syarat</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-900 mb-1">Dokumentasi</label>
+                        <input type="file" id="labelFoto" multiple accept="image/*" capture="environment" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-900 mb-1">Catatan</label>
+                        <textarea id="labelCatatan" rows="3" autocomplete="off" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Tuliskan catatan..."></textarea>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4 border-t border-slate-300">
+                    <button type="button" onclick="closeModal('label')" class="px-5 py-2.5 rounded-xl bg-slate-200 text-slate-900 hover:bg-slate-300 text-sm font-bold">Batal</button>
                     <button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold shadow-md">Simpan Data</button>
                 </div>
             </form>
@@ -594,45 +777,52 @@
                 <div class="space-y-4">
                     <h4 class="text-sm font-bold text-emerald-800 uppercase tracking-wider border-b border-slate-300 pb-2">1. Detail Rapid Test</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-900 mb-1">Nama Petugas</label>
-                            <input type="text" id="pestisidaPetugas" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Nama lengkap petugas">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-900 mb-1">Tanggal Uji</label>
-                            <input type="date" id="pestisidaTanggal" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-900 mb-1">Lokasi Pengujian (Pasar/Toko/Lapak)</label>
-                            <input type="text" id="pestisidaLokasi" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Contoh: Pasar Mardika Blok B">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-900 mb-1">Kecamatan</label>
-                            <select id="pestisidaKecamatan" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600">
-                                <option value="Sirimau">Sirimau</option>
-                                <option value="Nusaniwe">Nusaniwe</option>
-                                <option value="Baguala">Baguala</option>
-                                <option value="Teluk Ambon">Teluk Ambon</option>
-                                <option value="Leitimur Selatan">Leitimur Selatan</option>
+        <div>
+            <label class="block text-xs font-bold text-slate-900 mb-1">Nama Petugas</label>
+            <input type="text" id="pestisidaPetugas" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Nama lengkap petugas">
+        </div>
+        <div>
+            <label class="block text-xs font-bold text-slate-900 mb-1">Tanggal Uji</label>
+            <input type="date" id="pestisidaTanggal" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600">
+        </div>
+        <div>
+            <label class="block text-xs font-bold text-slate-900 mb-1">Lokasi Pengujian (Pasar/Toko/Lahan)</label>
+            <input type="text" id="pestisidaLokasi" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Contoh: Pasar Waiheru">
+        </div>
+        <div>
+            <label class="block text-xs font-bold text-slate-900 mb-1">Komoditas</label>
+            <input type="text" id="pestisidaKomoditas" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Contoh: Cabai Merah Besar">
+        </div>
+        <div>
+            <label class="block text-xs font-bold text-slate-900 mb-1">Asal Komoditas</label>
+            <input type="text" id="pestisidaAsal" autocomplete="off" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Contoh: Asal daerah/produsen...">
+        </div>
+        <div>
+            <label class="block text-xs font-bold text-slate-900 mb-1">Kecamatan</label>
+            <select id="pestisidaKecamatan" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600">
+                <option value="Sirimau">Sirimau</option>
+                <option value="Nusaniwe">Nusaniwe</option>
+                <option value="Baguala">Baguala</option>
+                <option value="Teluk Ambon">Teluk Ambon</option>
+                <option value="Leitimur Selatan">Leitimur Selatan</option>
+            </select>
+        </div>
+        <div class="sm:col-span-2">
+            <label class="block text-xs font-bold text-slate-900 mb-1">Jenis PSAT</label>
+            <select id="pestisidaJenisPsat" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600">
+                <option value="Bawang">Bawang</option>
+                <option value="Buah">Buah</option>
+                <option value="Cabai">Cabai</option>
+                <option value="Daun">Daun</option>
+                <option value="Rempah">Rempah</option>
+                <option value="Sayur">Sayur</option>
+                <option value="Tomat">Tomat</option>
+            </select>
+        </div>
+    </div>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-900 mb-1">Jenis PSAT</label>
-                            <select id="pestisidaJenisPsat" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600">
-                                <option value="Bawang">Bawang</option>
-                                <option value="Buah">Buah</option>
-                                <option value="Cabai">Cabai</option>
-                                <option value="Daun">Daun</option>
-                                <option value="Rempah">Rempah</option>
-                                <option value="Sayur">Sayur</option>
-                                <option value="Tomat">Tomat</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-900 mb-1">Nama Komoditas</label>
-                            <input type="text" id="pestisidaKomoditas" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Contoh: Cabai Merah Besar">
-                        </div>
-                    </div>
                 </div>
 
                 <div class="space-y-4">
@@ -663,12 +853,12 @@
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-slate-900 mb-1">Kamera / Galeri (Pilih Foto)</label>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Dokumentasi</label>
                             <input type="file" id="pestisidaFoto" multiple accept="image/*" capture="environment" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-900 mb-1">Catatan Pengujian</label>
-                            <input type="text" id="pestisidaCatatan" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Keterangan tambahan...">
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Catatan</label>
+                            <input type="text" id="pestisidaCatatan" autocomplete="off" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Keterangan tambahan...">
                         </div>
                     </div>
                 </div>
@@ -701,7 +891,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-900 mb-1">Nama Petugas</label>
-                            <input type="text" id="sppgPetugas" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Nama lengkap petugas">
+                            <input type="text" id="sppgPetugas" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Nama lengkap petugas">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-900 mb-1">Tanggal Pengawasan</label>
@@ -709,7 +899,7 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-900 mb-1">Lokasi Pengawasan</label>
-                            <input type="text" id="sppgLokasi" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Contoh: Toko Pangan Sehat">
+                            <input type="text" id="sppgLokasi" autocomplete="off" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Contoh: Toko Pangan Sehat">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-900 mb-1">Kecamatan</label>
@@ -909,14 +1099,14 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-900 mb-1">Dokumentasi (Kamera HP / Galeri - Bisa Unggah Banyak Foto)</label>
+                            <label class="block text-xs font-bold text-slate-900 mb-1">Dokumentasi</label>
                             <input type="file" id="sppgFoto" multiple accept="image/*" capture="environment" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700">
                             <span class="text-[11px] text-slate-700 mt-1 block font-medium">Foto tersimpan otomatis ke Spreadsheet & Google Drive.</span>
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-900 mb-1">Catatan (Isi Teks Saja)</label>
-                        <textarea id="sppgCatatan" rows="3" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Tuliskan catatan atau rekomendasi pembinaan..."></textarea>
+                        <label class="block text-xs font-bold text-slate-900 mb-1">Catatan</label>
+                        <textarea id="sppgCatatan" rows="3" autocomplete="off" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-emerald-600" placeholder="Tuliskan catatan atau rekomendasi pembinaan..."></textarea>
                     </div>
                 </div>
 
@@ -941,6 +1131,54 @@
         </div>
     </div>
 
+    <!-- ==================== MODAL LOGIN & GANTI PASSWORD ADMIN ==================== -->
+    <div id="modalAdminAuth" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-[#FAF9F6] border border-slate-400 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden p-6 space-y-6 text-slate-950">
+            <div class="flex items-center justify-between border-b border-slate-300 pb-4">
+                <h3 id="adminAuthModalTitle" class="text-lg font-bold text-slate-950 flex items-center gap-2">
+                    <i data-lucide="lock" class="w-5 h-5 text-slate-800"></i> Login Admin
+                </h3>
+                <button onclick="closeAdminAuthModal()" class="text-slate-700 hover:text-black p-1 rounded-lg">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="space-y-4 text-sm font-medium">
+                <!-- Mode Login -->
+                <div id="loginSection" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-900 mb-1">Password Admin</label>
+                        <!-- type="password" membuat teks tertutup titik-titik -->
+                        <input type="password" id="adminPasswordInput" placeholder="Masukkan password..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-slate-800">
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <div class="flex gap-2">
+                            <button type="button" onclick="closeAdminAuthModal()" class="px-4 py-2 rounded-xl bg-slate-200 text-slate-900 font-bold">Batal</button>
+                            <button type="button" onclick="submitAdminLogin()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold shadow-md">Login</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mode Ganti Password -->
+                <div id="changePassSection" class="space-y-4 hidden">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-900 mb-1">Password Lama</label>
+                        <input type="password" id="oldPasswordInput" placeholder="Masukkan password lama..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-slate-800">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-900 mb-1">Password Baru</label>
+                        <input type="password" id="newPasswordInput" placeholder="Masukkan password baru..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-slate-800">
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <button type="button" onclick="toggleChangePasswordMode()" class="text-xs text-slate-700 hover:underline font-bold">Kembali ke Login</button>
+                        <div class="flex gap-2">
+                            <button type="button" onclick="closeAdminAuthModal()" class="px-4 py-2 rounded-xl bg-slate-200 text-slate-900 font-bold">Batal</button>
+                            <button type="button" onclick="submitChangePassword()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold shadow-md">Simpan Password</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ==================== MODAL SETTINGS / APPS SCRIPT URL ==================== -->
     <div id="modalSettings" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-[#FAF9F6] border border-amber-400 w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden p-6 space-y-6 text-slate-950">
@@ -956,15 +1194,15 @@
                 <p class="text-slate-900">Masukkan URL Web App Google Apps Script agar setiap data input otomatis terekam di Google Spreadsheet dan Google Drive.</p>
                 <div>
                     <label class="block text-xs font-bold text-slate-900 mb-1">Google Apps Script Web App URL</label>
-                    <input type="text" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-amber-600">
+                    <input type="text" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/AKfycbyNFyzi4NQ0fSO8ThyqBAr_KoT7GJGu56ZtP9841xV8cXZfgvzx9LbMul-7dkDAUMj4/exec" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-amber-600">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-900 mb-1">Link Google Spreadsheet</label>
-                    <input type="text" id="sheetUrlInput" placeholder="https://docs.google.com/spreadsheets/d/..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-amber-600">
+                    <input type="text" id="sheetUrlInput" placeholder="https://docs.google.com/spreadsheets/d/1UhxcvYB2Tmp6bCeAlpc3ESJRLpNLsWYT6WZ3d6ukubo/edit?gid=1214040022#gid=1214040022" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-amber-600">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-900 mb-1">Link Google Drive Folder</label>
-                    <input type="text" id="driveUrlInput" placeholder="https://drive.google.com/drive/folders/..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-amber-600">
+                    <input type="text" id="driveUrlInput" placeholder="https://drive.google.com/drive/folders/1le1AOxSU-Y7j1t2zdjKuJHh4nKrvTiVg" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-950 font-medium focus:outline-none focus:border-amber-600">
                 </div>
             </div>
             <div class="flex justify-end gap-3 pt-4 border-t border-slate-300">
@@ -1000,11 +1238,13 @@
         let currentBgIndex = 0;
         setInterval(() => {
             currentBgIndex = (currentBgIndex + 1) % bgImages.length;
-            document.getElementById('bgSlider').style.backgroundImage = `url('${bgImages[currentBgIndex]}')`;
+            const slider = document.getElementById('bgSlider');
+            if(slider) slider.style.backgroundImage = `url('${bgImages[currentBgIndex]}')`;
         }, 8000);
 
         let dbState = {
             gudang: JSON.parse(localStorage.getItem('sipensil_gudang')) || [],
+            label: JSON.parse(localStorage.getItem('sipensil_label')) || [],
             pestisida: JSON.parse(localStorage.getItem('sipensil_pestisida')) || [],
             sppg: JSON.parse(localStorage.getItem('sipensil_sppg')) || [],
             settings: JSON.parse(localStorage.getItem('sipensil_settings')) || {
@@ -1014,13 +1254,119 @@
             }
         };
 
-        let chartsInstance = { pieGudang: null, piePestisida: null, pieSppg: null, bar: null };
+        let chartsInstance = { pieGudang: null, pieLabel: null, piePestisida: null, pieSppg: null, bar: null };
+        let isAdminLoggedIn = localStorage.getItem('sipensil_admin_logged') === 'true';
 
         window.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             initSettingsUI();
+            updateAdminUI();
             renderAll();
         });
+
+        function updateAdminUI() {
+            const adminDesktop = document.getElementById('adminMenuDesktop');
+            const adminMobile = document.getElementById('adminMenuMobile');
+            const authBtn = document.getElementById('adminAuthBtn');
+            const authBtnMobile = document.getElementById('adminAuthBtnMobile');
+
+            if(isAdminLoggedIn) {
+                adminDesktop.classList.remove('hidden');
+                adminDesktop.classList.add('flex');
+                adminMobile.classList.remove('hidden');
+                authBtn.innerHTML = `<i data-lucide="unlock" class="w-4 h-4"></i> Logout Admin`;
+                authBtn.className = "ml-2 px-3.5 py-2 rounded-xl text-sm font-bold transition bg-rose-600 text-white hover:bg-rose-700 flex items-center gap-1.5";
+                authBtnMobile.innerHTML = `<i data-lucide="unlock" class="w-5 h-5"></i>`;
+                authBtnMobile.className = "p-2 rounded-xl bg-rose-600 text-white";
+            } else {
+                adminDesktop.classList.remove('flex');
+                adminDesktop.classList.add('hidden');
+                adminMobile.classList.add('hidden');
+                authBtn.innerHTML = `<i data-lucide="lock" class="w-4 h-4"></i> Login Admin`;
+                authBtn.className = "ml-2 px-3.5 py-2 rounded-xl text-sm font-bold transition bg-slate-800 text-white hover:bg-slate-700 flex items-center gap-1.5";
+                authBtnMobile.innerHTML = `<i data-lucide="lock" class="w-5 h-5"></i>`;
+                authBtnMobile.className = "p-2 rounded-xl bg-slate-800 text-white";
+                
+                // Jika sedang tidak login dan berada di tab selain dashboard, kembalikan ke dashboard
+                const activeTab = document.querySelector('.tab-content:not(.hidden)').id;
+                if(activeTab !== 'tab-dashboard') {
+                    switchTab('dashboard');
+                }
+            }
+            lucide.createIcons();
+        }
+
+        function handleAdminAuth() {
+            if(isAdminLoggedIn) {
+                isAdminLoggedIn = false;
+                localStorage.setItem('sipensil_admin_logged', 'false');
+                updateAdminUI();
+                switchTab('dashboard');
+                showToast('Berhasil Logout dari Admin.');
+            } else {
+                // Membuka modal login password tersembunyi (tidak menggunakan prompt agar teks tertutup titik-titik)
+                document.getElementById('adminPasswordInput').value = '';
+                document.getElementById('oldPasswordInput').value = '';
+                document.getElementById('newPasswordInput').value = '';
+                document.getElementById('loginSection').classList.remove('hidden');
+                document.getElementById('changePassSection').classList.add('hidden');
+                document.getElementById('adminAuthModalTitle').innerHTML = `<i data-lucide="lock" class="w-5 h-5 text-slate-800"></i> Login Admin`;
+                document.getElementById('modalAdminAuth').classList.remove('hidden');
+                lucide.createIcons();
+            }
+        }
+
+        function closeAdminAuthModal() {
+            document.getElementById('modalAdminAuth').classList.add('hidden');
+        }
+
+        function toggleChangePasswordMode() {
+            const loginSec = document.getElementById('loginSection');
+            const changeSec = document.getElementById('changePassSection');
+            const title = document.getElementById('adminAuthModalTitle');
+            if(loginSec.classList.contains('hidden')) {
+                loginSec.classList.remove('hidden');
+                changeSec.classList.add('hidden');
+                title.innerHTML = `<i data-lucide="lock" class="w-5 h-5 text-slate-800"></i> Login Admin`;
+            } else {
+                loginSec.classList.add('hidden');
+                changeSec.classList.remove('hidden');
+                title.innerHTML = `<i data-lucide="key" class="w-5 h-5 text-emerald-700"></i> Ganti Password Admin`;
+            }
+            lucide.createIcons();
+        }
+
+        function submitAdminLogin() {
+            const pass = document.getElementById('adminPasswordInput').value;
+            const currentPass = localStorage.getItem('sipensil_admin_pass') || 'psat';
+            if(pass === currentPass) {
+                isAdminLoggedIn = true;
+                localStorage.setItem('sipensil_admin_logged', 'true');
+                updateAdminUI();
+                closeAdminAuthModal();
+                showToast('Berhasil Login sebagai Admin!');
+            } else {
+                alert('Password salah!');
+            }
+        }
+
+        function submitChangePassword() {
+            const oldPass = document.getElementById('oldPasswordInput').value;
+            const newPass = document.getElementById('newPasswordInput').value;
+            const currentPass = localStorage.getItem('sipensil_admin_pass') || 'admin123';
+            
+            if(oldPass !== currentPass) {
+                alert('Password lama salah!');
+                return;
+            }
+            if(!newPass || newPass.trim() === '') {
+                alert('Password baru tidak boleh kosong!');
+                return;
+            }
+            localStorage.setItem('sipensil_admin_pass', newPass);
+            alert('Password admin berhasil diubah!');
+            closeAdminAuthModal();
+        }
 
         function initSettingsUI() {
             document.getElementById('scriptUrlInput').value = dbState.settings.scriptUrl;
@@ -1038,7 +1384,7 @@
             const sheetBtn2 = document.getElementById('sheetLinkBtn2');
             if(sheetBtn2) sheetBtn2.href = sheetUrl;
             
-            const driveBtn = document.getElementById('driveLinkBtn');
+            const driveBtn = document.getElementById('drivelinkBtn');
             if(driveBtn) driveBtn.href = driveUrl;
         }
 
@@ -1053,6 +1399,12 @@
         }
 
         function switchTab(tabName) {
+            // Batasi akses menu selain dashboard jika belum login admin
+            if(tabName !== 'dashboard' && !isAdminLoggedIn) {
+                alert('Akses ditolak! Menu ini khusus untuk Admin. Silakan Login Admin terlebih dahulu.');
+                return;
+            }
+
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById(`tab-${tabName}`).classList.remove('hidden');
 
@@ -1069,11 +1421,29 @@
             }
         }
 
+        // Fungsi baru untuk melakukan filter otomatis di Data Pengawasan / Rekap berdasarkan status statistik yang diklik
+        function filterByStat(kesimpulan) {
+            if (!isAdminLoggedIn) {
+                alert('Akses ditolak! Menu rekap khusus untuk Admin. Silakan Login Admin terlebih dahulu.');
+                return;
+            }
+            switchTab('rekap');
+            const searchInput = document.getElementById('searchInput');
+            if(searchInput) {
+                searchInput.value = kesimpulan;
+                filterRekapTable();
+            }
+        }
+
         function toggleMobileMenu() {
             document.getElementById('mobileMenu').classList.toggle('hidden');
         }
 
         function openModal(type, id = null) {
+            if(!isAdminLoggedIn) {
+                alert('Akses ditolak! Tindakan ini memerlukan hak akses Admin.');
+                return;
+            }
             if(type === 'gudang') {
                 document.getElementById('formGudang').reset();
                 document.getElementById('gudangId').value = '';
@@ -1102,6 +1472,35 @@
                     }
                 }
                 document.getElementById('modalGudang').classList.remove('hidden');
+            } else if(type === 'label') {
+                document.getElementById('formLabel').reset();
+                document.getElementById('labelId').value = '';
+                document.getElementById('titleModalLabelText').innerText = 'Form Pengawasan Label PSAT';
+                document.getElementById('labelTanggal').value = new Date().toISOString().slice(0,10);
+
+                if(id) {
+                    const item = dbState.label.find(x => x.id === id);
+                    if(item) {
+                        document.getElementById('labelId').value = item.id;
+                        document.getElementById('titleModalLabelText').innerText = 'Edit Pengawasan Label PSAT';
+                        document.getElementById('labelPetugas').value = item.petugas || '';
+                        document.getElementById('labelTanggal').value = item.tanggal || '';
+                        document.getElementById('labelLokasi').value = item.lokasi || '';
+                        document.getElementById('labelKecamatan').value = item.kecamatan || 'Sirimau';
+                        document.getElementById('labelJenisPsat').value = item.jenisPsat || '';
+                        document.getElementById('labelNamaDagang').value = item.namaDagang || '';
+                        document.getElementById('labelNamaProdusen').value = item.namaProdusen || '';
+                        document.getElementById('labelAlamatProdusen').value = item.alamatProdusen || '';
+                        document.getElementById('labelNoRegistrasi').value = item.noRegistrasi || 'Ada';
+                        document.getElementById('labelKlaim').value = item.klaim || '';
+                        document.getElementById('labelTglProduksi').value = item.tglProduksi || 'Ada';
+                        document.getElementById('labelTglKadaluwarsa').value = item.tglKadaluwarsa || 'Ada';
+                        document.getElementById('labelKesesuaian').value = item.kesesuaian || 'Sesuai';
+                        document.getElementById('labelKesimpulan').value = item.kesimpulan || 'Memenuhi Syarat';
+                        document.getElementById('labelCatatan').value = item.catatan || '';
+                    }
+                }
+                document.getElementById('modalLabel').classList.remove('hidden');
             } else if(type === 'pestisida') {
                 document.getElementById('formPestisida').reset();
                 document.getElementById('pestisidaId').value = '';
@@ -1119,6 +1518,7 @@
                         document.getElementById('pestisidaKecamatan').value = item.kecamatan || 'Sirimau';
                         document.getElementById('pestisidaJenisPsat').value = item.jenisPsat || 'Bawang';
                         document.getElementById('pestisidaKomoditas').value = item.komoditas || '';
+						document.getElementById('pestisidaAsal').value = item.asalKomoditas || '';
                         document.getElementById('pestisidaJenisTest').value = item.jenisTest || 'Rapid Test Pestisida';
                         document.getElementById('pestisidaHasilUji').value = item.hasilUji || 'Negatif';
                         document.getElementById('pestisidaKesimpulan').value = item.kesimpulan || 'Memenuhi Syarat';
@@ -1153,29 +1553,37 @@
                         }
                     }
                 }
+                document.getElementById('modalSppg').classList.add('flex');
                 document.getElementById('modalSppg').classList.remove('hidden');
             }
             lucide.createIcons();
         }
 
         function closeModal(type) {
-            document.getElementById(`modal${type.charAt(0).toUpperCase() + type.slice(1)}`).classList.add('hidden');
+            if(type === 'gudang') document.getElementById('modalGudang').classList.add('hidden');
+            if(type === 'label') document.getElementById('modalLabel').classList.add('hidden');
+            if(type === 'pestisida') document.getElementById('modalPestisida').classList.add('hidden');
+            if(type === 'sppg') document.getElementById('modalSppg').classList.add('hidden');
         }
 
         function openSettingsModal() {
+            if(!isAdminLoggedIn) {
+                alert('Akses ditolak! Pengaturan sinkronisasi memerlukan hak akses Admin.');
+                return;
+            }
             document.getElementById('modalSettings').classList.remove('hidden');
-            lucide.createIcons();
         }
+
         function closeSettingsModal() {
             document.getElementById('modalSettings').classList.add('hidden');
         }
 
-        function showPhotoModal(imgSrc) {
-            document.getElementById('fullPhotoImg').src = imgSrc;
-            document.getElementById('downloadPhotoBtn').href = imgSrc;
+        function showPhotoModal(url) {
+            document.getElementById('fullPhotoImg').src = url;
+            document.getElementById('downloadPhotoBtn').href = url;
             document.getElementById('modalPhoto').classList.remove('hidden');
-            lucide.createIcons();
         }
+
         function closePhotoModal() {
             document.getElementById('modalPhoto').classList.add('hidden');
         }
@@ -1186,26 +1594,28 @@
             toast.classList.remove('translate-y-24', 'opacity-0');
             setTimeout(() => {
                 toast.classList.add('translate-y-24', 'opacity-0');
-            }, 3500);
+            }, 3000);
         }
 
-        async function getBase64Photos(fileInputId) {
-            const files = document.getElementById(fileInputId).files;
-            if(!files || files.length === 0) return [];
-            let promises = [];
-            for(let file of files) {
-                promises.push(new Promise((resolve) => {
-                    let reader = new FileReader();
-                    reader.onload = (e) => resolve(e.target.result);
+        // Helper untuk convert file gambar ke Base64 agar dapat disimpan di localStorage & Spreadsheet
+        async function convertFilesToBase64(fileInputId) {
+            const fileInput = document.getElementById(fileInputId);
+            if(!fileInput || fileInput.files.length === 0) return [];
+            const promises = Array.from(fileInput.files).map(file => {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = error => reject(error);
                     reader.readAsDataURL(file);
-                }));
-            }
+                });
+            });
             return await Promise.all(promises);
         }
 
+        // Simpan Data Gudang
         async function saveGudang(e) {
             e.preventDefault();
-            const id = document.getElementById('gudangId').value || 'g_' + Date.now();
+            const id = document.getElementById('gudangId').value || 'GDG-' + Date.now();
             const petugas = document.getElementById('gudangPetugas').value;
             const tanggal = document.getElementById('gudangTanggal').value;
             const lokasi = document.getElementById('gudangLokasi').value;
@@ -1213,83 +1623,113 @@
             const kesimpulan = document.getElementById('gudangKesimpulan').value;
             const catatan = document.getElementById('gudangCatatan').value;
 
-            const answers = {
-                q1a: document.querySelector('input[name="q1a"]:checked')?.value || '',
-                q1b: document.querySelector('input[name="q1b"]:checked')?.value || '',
-                q1c: document.querySelector('input[name="q1c"]:checked')?.value || '',
-                q2a: document.querySelector('input[name="q2a"]:checked')?.value || '',
-                q2b: document.querySelector('input[name="q2b"]:checked')?.value || '',
-                q2c: document.querySelector('input[name="q2c"]:checked')?.value || '',
-                q3a: document.querySelector('input[name="q3a"]:checked')?.value || '',
-                q3b: document.querySelector('input[name="q3b"]:checked')?.value || '',
-                q3c: document.querySelector('input[name="q3c"]:checked')?.value || '',
-                q4a: document.querySelector('input[name="q4a"]:checked')?.value || '',
-                q5a: document.querySelector('input[name="q5a"]:checked')?.value || '',
-                q5b: document.querySelector('input[name="q5b"]:checked')?.value || '',
-            };
+            const answers = {};
+            const radioNames = ['q1a','q1b','q1c','q2a','q2b','q2c','q3a','q3b','q3c','q4a','q5a','q5b'];
+            radioNames.forEach(name => {
+                const checked = document.querySelector(`input[name="${name}"]:checked`);
+                if(checked) answers[name] = checked.value;
+            });
 
-            let foto = await getBase64Photos('gudangFoto');
-            let existingItem = dbState.gudang.find(x => x.id === id);
-            if(foto.length === 0) {
-                foto = existingItem ? existingItem.foto : ['https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80'];
-            }
+            const photos = await convertFilesToBase64('gudangFoto');
+            const existingItem = dbState.gudang.find(x => x.id === id);
+            const fotoFinal = photos.length > 0 ? photos : (existingItem ? existingItem.foto : []);
 
-            const newData = { id, petugas, tanggal, lokasi, kecamatan, kesimpulan, catatan, answers, foto };
+            const dataObj = { id, module: 'Gudang PSAT', petugas, tanggal, lokasi, kecamatan, kesimpulan, catatan, answers, foto: fotoFinal };
 
             if(existingItem) {
                 const index = dbState.gudang.findIndex(x => x.id === id);
-                dbState.gudang[index] = newData;
-                showToast('Data Gudang PSAT berhasil diperbarui & disinkronkan!');
+                dbState.gudang[index] = dataObj;
             } else {
-                dbState.gudang.unshift(newData);
-                showToast('Data Gudang PSAT berhasil disimpan & disinkronkan!');
+                dbState.gudang.unshift(dataObj);
             }
 
             localStorage.setItem('sipensil_gudang', JSON.stringify(dbState.gudang));
             closeModal('gudang');
             renderAll();
-            syncToAppsScript('Gudang', newData);
+            showToast('Data Gudang PSAT berhasil disimpan!');
+            syncToGoogleSheet(dataObj);
         }
 
+        // Simpan Data Label
+        async function saveLabel(e) {
+            e.preventDefault();
+            const id = document.getElementById('labelId').value || 'LBL-' + Date.now();
+            const petugas = document.getElementById('labelPetugas').value;
+            const tanggal = document.getElementById('labelTanggal').value;
+            const lokasi = document.getElementById('labelLokasi').value;
+            const kecamatan = document.getElementById('labelKecamatan').value;
+            const jenisPsat = document.getElementById('labelJenisPsat').value;
+            const namaDagang = document.getElementById('labelNamaDagang').value;
+            const namaProdusen = document.getElementById('labelNamaProdusen').value;
+            const alamatProdusen = document.getElementById('labelAlamatProdusen').value;
+            const noRegistrasi = document.getElementById('labelNoRegistrasi').value;
+            const klaim = document.getElementById('labelKlaim').value;
+            const tglProduksi = document.getElementById('labelTglProduksi').value;
+            const tglKadaluwarsa = document.getElementById('labelTglKadaluwarsa').value;
+            const kesesuaian = document.getElementById('labelKesesuaian').value;
+            const kesimpulan = document.getElementById('labelKesimpulan').value;
+            const catatan = document.getElementById('labelCatatan').value;
+
+            const photos = await convertFilesToBase64('labelFoto');
+            const existingItem = dbState.label.find(x => x.id === id);
+            const fotoFinal = photos.length > 0 ? photos : (existingItem ? existingItem.foto : []);
+
+            const dataObj = { id, module: 'Pengawasan Label', petugas, tanggal, lokasi, kecamatan, jenisPsat, namaDagang, namaProdusen, alamatProdusen, noRegistrasi, klaim, tglProduksi, tglKadaluwarsa, kesesuaian, kesimpulan, catatan, foto: fotoFinal };
+
+            if(existingItem) {
+                const index = dbState.label.findIndex(x => x.id === id);
+                dbState.label[index] = dataObj;
+            } else {
+                dbState.label.unshift(dataObj);
+            }
+
+            localStorage.setItem('sipensil_label', JSON.stringify(dbState.label));
+            closeModal('label');
+            renderAll();
+            showToast('Data Pengawasan Label berhasil disimpan!');
+            syncToGoogleSheet(dataObj);
+        }
+
+        // Simpan Data Pestisida
         async function savePestisida(e) {
             e.preventDefault();
-            const id = document.getElementById('pestisidaId').value || 'p_' + Date.now();
+            const id = document.getElementById('pestisidaId').value || 'PST-' + Date.now();
             const petugas = document.getElementById('pestisidaPetugas').value;
             const tanggal = document.getElementById('pestisidaTanggal').value;
             const lokasi = document.getElementById('pestisidaLokasi').value;
             const kecamatan = document.getElementById('pestisidaKecamatan').value;
             const jenisPsat = document.getElementById('pestisidaJenisPsat').value;
             const komoditas = document.getElementById('pestisidaKomoditas').value;
+			const asalKomoditas = document.getElementById('pestisidaAsal').value;
             const jenisTest = document.getElementById('pestisidaJenisTest').value;
             const hasilUji = document.getElementById('pestisidaHasilUji').value;
             const kesimpulan = document.getElementById('pestisidaKesimpulan').value;
             const catatan = document.getElementById('pestisidaCatatan').value;
-            let foto = await getBase64Photos('pestisidaFoto');
-            let existingItem = dbState.pestisida.find(x => x.id === id);
-            if(foto.length === 0) {
-                foto = existingItem ? existingItem.foto : ['https://images.unsplash.com/photo-1563583726071-87b640db71f9?auto=format&fit=crop&w=600&q=80'];
-            }
 
-            const newData = { id, petugas, tanggal, lokasi, kecamatan, jenisPsat, komoditas, jenisTest, hasilUji, kesimpulan, catatan, foto };
-            
+            const photos = await convertFilesToBase64('pestisidaFoto');
+            const existingItem = dbState.pestisida.find(x => x.id === id);
+            const fotoFinal = photos.length > 0 ? photos : (existingItem ? existingItem.foto : []);
+
+            const dataObj = { id, module: 'Pengujian Pestisida', petugas, tanggal, lokasi, kecamatan, jenisPsat, komoditas, asalKomoditas, jenisTest, hasilUji, kesimpulan, catatan, foto: fotoFinal };
+
             if(existingItem) {
                 const index = dbState.pestisida.findIndex(x => x.id === id);
-                dbState.pestisida[index] = newData;
-                showToast('Data Pengujian Pestisida berhasil diperbarui & disinkronkan!');
+                dbState.pestisida[index] = dataObj;
             } else {
-                dbState.pestisida.unshift(newData);
-                showToast('Data Pengujian Pestisida berhasil disimpan & disinkronkan!');
+                dbState.pestisida.unshift(dataObj);
             }
 
             localStorage.setItem('sipensil_pestisida', JSON.stringify(dbState.pestisida));
             closeModal('pestisida');
             renderAll();
-            syncToAppsScript('Pestisida', newData);
+            showToast('Data Pengujian Pestisida berhasil disimpan!');
+            syncToGoogleSheet(dataObj);
         }
 
+        // Simpan Data SPPG
         async function saveSppg(e) {
             e.preventDefault();
-            const id = document.getElementById('sppgId').value || 's_' + Date.now();
+            const id = document.getElementById('sppgId').value || 'SPPG-' + Date.now();
             const petugas = document.getElementById('sppgPetugas').value;
             const tanggal = document.getElementById('sppgTanggal').value;
             const lokasi = document.getElementById('sppgLokasi').value;
@@ -1297,253 +1737,443 @@
             const kesimpulan = document.getElementById('sppgKesimpulan').value;
             const catatan = document.getElementById('sppgCatatan').value;
 
-            const answers = {
-                sppg_q1a: document.querySelector('input[name="sppg_q1a"]:checked')?.value || '',
-                sppg_q1b: document.querySelector('input[name="sppg_q1b"]:checked')?.value || '',
-                sppg_q2a: document.querySelector('input[name="sppg_q2a"]:checked')?.value || '',
-                sppg_q2b: document.querySelector('input[name="sppg_q2b"]:checked')?.value || '',
-                sppg_q2c: document.querySelector('input[name="sppg_q2c"]:checked')?.value || '',
-                sppg_q2d: document.querySelector('input[name="sppg_q2d"]:checked')?.value || '',
-                sppg_q2e: document.querySelector('input[name="sppg_q2e"]:checked')?.value || '',
-                sppg_q3a: document.querySelector('input[name="sppg_q3a"]:checked')?.value || '',
-                sppg_q3b: document.querySelector('input[name="sppg_q3b"]:checked')?.value || '',
-                sppg_q3c: document.querySelector('input[name="sppg_q3c"]:checked')?.value || '',
-                sppg_q4a: document.querySelector('input[name="sppg_q4a"]:checked')?.value || '',
-                sppg_q4b: document.querySelector('input[name="sppg_q4b"]:checked')?.value || '',
-                sppg_q4c: document.querySelector('input[name="sppg_q4c"]:checked')?.value || '',
-                sppg_q5a: document.querySelector('input[name="sppg_q5a"]:checked')?.value || '',
-                sppg_q5b: document.querySelector('input[name="sppg_q5b"]:checked')?.value || '',
-                sppg_q5c: document.querySelector('input[name="sppg_q5c"]:checked')?.value || '',
-                sppg_q5d: document.querySelector('input[name="sppg_q5d"]:checked')?.value || '',
-                sppg_q5e: document.querySelector('input[name="sppg_q5e"]:checked')?.value || '',
-                sppg_q5f: document.querySelector('input[name="sppg_q5f"]:checked')?.value || '',
-            };
+            const answers = {};
+            const radioNames = ['sppg_q1a','sppg_q1b','sppg_q2a','sppg_q2b','sppg_q2c','sppg_q2d','sppg_q2e','sppg_q3a','sppg_q3b','sppg_q3c','sppg_q4a','sppg_q4b','sppg_q4c','sppg_q5a','sppg_q5b','sppg_q5c','sppg_q5d','sppg_q5e','sppg_q5f'];
+            radioNames.forEach(name => {
+                const checked = document.querySelector(`input[name="${name}"]:checked`);
+                if(checked) answers[name] = checked.value;
+            });
 
-            let foto = await getBase64Photos('sppgFoto');
-            let existingItem = dbState.sppg.find(x => x.id === id);
-            if(foto.length === 0) {
-                foto = existingItem ? existingItem.foto : ['https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=600&q=80'];
-            }
+            const photos = await convertFilesToBase64('sppgFoto');
+            const existingItem = dbState.sppg.find(x => x.id === id);
+            const fotoFinal = photos.length > 0 ? photos : (existingItem ? existingItem.foto : []);
 
-            const newData = { id, petugas, tanggal, lokasi, kecamatan, kesimpulan, catatan, answers, foto };
+            const dataObj = { id, module: 'Pengawasan SPPG', petugas, tanggal, lokasi, kecamatan, kesimpulan, catatan, answers, foto: fotoFinal };
 
             if(existingItem) {
                 const index = dbState.sppg.findIndex(x => x.id === id);
-                dbState.sppg[index] = newData;
-                showToast('Data Pengawasan SPPG berhasil diperbarui & disinkronkan!');
+                dbState.sppg[index] = dataObj;
             } else {
-                dbState.sppg.unshift(newData);
-                showToast('Data Pengawasan SPPG berhasil disimpan & disinkronkan!');
+                dbState.sppg.unshift(dataObj);
             }
 
             localStorage.setItem('sipensil_sppg', JSON.stringify(dbState.sppg));
             closeModal('sppg');
             renderAll();
-            syncToAppsScript('SPPG', newData);
+            showToast('Data Pengawasan SPPG berhasil disimpan!');
+            syncToGoogleSheet(dataObj);
         }
 
-        function deleteItem(type, id) {
-            if(confirm('Apakah Anda yakin ingin menghapus data pengawasan ini? Perubahan akan diperbarui di spreadsheet & Google Drive.')) {
-                if(type === 'gudang') {
-                    dbState.gudang = dbState.gudang.filter(x => x.id !== id);
-                    localStorage.setItem('sipensil_gudang', JSON.stringify(dbState.gudang));
-                } else if(type === 'pestisida') {
-                    dbState.pestisida = dbState.pestisida.filter(x => x.id !== id);
-                    localStorage.setItem('sipensil_pestisida', JSON.stringify(dbState.pestisida));
-                } else if(type === 'sppg') {
-                    dbState.sppg = dbState.sppg.filter(x => x.id !== id);
-                    localStorage.setItem('sipensil_sppg', JSON.stringify(dbState.sppg));
-                }
+        // Hapus Data
+        function deleteData(type, id) {
+            if(!isAdminLoggedIn) {
+                alert('Akses ditolak! Penghapusan data memerlukan hak akses Admin.');
+                return;
+            }
+            if(confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+                if(type === 'gudang') dbState.gudang = dbState.gudang.filter(x => x.id !== id);
+                if(type === 'label') dbState.label = dbState.label.filter(x => x.id !== id);
+                if(type === 'pestisida') dbState.pestisida = dbState.pestisida.filter(x => x.id !== id);
+                if(type === 'sppg') dbState.sppg = dbState.sppg.filter(x => x.id !== id);
+
+                localStorage.setItem('sipensil_gudang', JSON.stringify(dbState.gudang));
+                localStorage.setItem('sipensil_label', JSON.stringify(dbState.label));
+                localStorage.setItem('sipensil_pestisida', JSON.stringify(dbState.pestisida));
+                localStorage.setItem('sipensil_sppg', JSON.stringify(dbState.sppg));
+
                 renderAll();
                 showToast('Data berhasil dihapus.');
             }
         }
 
-        function syncToAppsScript(moduleName, dataObj) {
-            if(!dbState.settings.scriptUrl) return;
-            fetch(dbState.settings.scriptUrl, {
+        // Sinkronisasi ke Google Apps Script (jika URL diisi)
+        function syncToGoogleSheet(data) {
+            const scriptUrl = dbState.settings.scriptUrl;
+            if(!scriptUrl) return;
+            
+            fetch(scriptUrl, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ module: moduleName, action: 'SAVE', data: dataObj })
-            }).catch(err => console.log('AppsScript sync error:', err));
+                body: JSON.stringify(data)
+            }).then(() => {
+                console.log('Tersinkronisasi otomatis ke Google Spreadsheet & Drive.');
+            }).catch(err => {
+                console.error('Gagal sinkronisasi:', err);
+            });
         }
 
+        // Render seluruh tabel dan statistik
         function renderAll() {
-            renderDashboardStats();
+            renderGudangTable();
+            renderLabelTable();
+            renderPestisidaTable();
+            renderSppgTable();
+            renderRekapTable();
+            renderStats();
             renderCharts();
-            renderTableGudang();
-            renderTablePestisida();
-            renderTableSppg();
-            renderTableRekap();
             lucide.createIcons();
         }
 
-        function renderDashboardStats() {
-            const totalG = dbState.gudang.length;
-            const totalP = dbState.pestisida.length;
-            const totalS = dbState.sppg.length;
-            const totalAll = totalG + totalP + totalS;
-
-            const allItems = [...dbState.gudang, ...dbState.pestisida, ...dbState.sppg];
-            const aman = allItems.filter(x => x.kesimpulan === 'Memenuhi Syarat').length;
-            const tidakAman = totalAll - aman;
-            const pctAman = totalAll > 0 ? Math.round((aman / totalAll) * 100) : 0;
-            const pctTidak = totalAll > 0 ? 100 - pctAman : 0;
-
-            let kecCount = {};
-            allItems.forEach(x => {
-                if(x.kecamatan) kecCount[x.kecamatan] = (kecCount[x.kecamatan] || 0) + 1;
-            });
-            let focusKec = 'Sirimau';
-            let maxCount = -1;
-            for(let kec in kecCount) {
-                if(kecCount[kec] > maxCount) {
-                    maxCount = kecCount[kec];
-                    focusKec = kec;
-                }
+        function renderGudangTable() {
+            const tbody = document.getElementById('tableGudang');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            if(dbState.gudang.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-500 font-medium">Belum ada data pengawasan gudang PSAT.</td></tr>`;
+                return;
             }
+            dbState.gudang.forEach(item => {
+                let badgeClass = item.kesimpulan === 'Memenuhi Syarat' ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
+                let fotoHtml = '';
+                if(item.foto && item.foto.length > 0) {
+                    fotoHtml = `<div class="flex gap-1 flex-wrap">` + item.foto.map(f => `<img src="${f}" onclick="showPhotoModal('${f}')" class="w-10 h-10 object-cover rounded-lg border border-slate-300 cursor-pointer hover:scale-105 transition">`).join('') + `</div>`;
+                } else {
+                    fotoHtml = `<span class="text-xs text-slate-400">Tidak ada foto</span>`;
+                }
 
-            document.getElementById('statTotal').innerText = totalAll;
-            document.getElementById('statAman').innerText = aman;
-            document.getElementById('percentAman').innerText = pctAman + '%';
-            document.getElementById('statTidakAman').innerText = tidakAman;
-            document.getElementById('percentTidakAman').innerText = pctTidak + '%';
-            document.getElementById('statFokusWilayah').innerText = totalAll > 0 ? focusKec : 'Belum ada';
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50/80 transition">
+                        <td class="p-4">
+                            <div class="font-bold text-slate-950">${item.petugas}</div>
+                            <div class="text-xs text-slate-500">${item.tanggal}</div>
+                        </td>
+                        <td class="p-4">
+                            <div class="font-bold text-slate-950">${item.lokasi}</div>
+                            <div class="text-xs text-emerald-700 font-semibold">${item.kecamatan}</div>
+                        </td>
+                        <td class="p-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeClass}">${item.kesimpulan}</span>
+                        </td>
+                        <td class="p-4">${fotoHtml}</td>
+                        <td class="p-4 text-right space-x-2">
+                            <button onclick="openModal('gudang', '${item.id}')" class="p-2 rounded-xl bg-amber-100 text-amber-800 hover:bg-amber-200 transition" title="Edit"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
+                            <button onclick="deleteData('gudang', '${item.id}')" class="p-2 rounded-xl bg-rose-100 text-rose-800 hover:bg-rose-200 transition" title="Hapus"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
         }
 
-        function renderCharts() {
-            const createPie = (canvasId, dataList, instanceKey) => {
-                const aman = dataList.filter(x => x.kesimpulan === 'Memenuhi Syarat').length;
-                const tidak = dataList.length - aman;
-                const ctx = document.getElementById(canvasId).getContext('2d');
-                if(chartsInstance[instanceKey]) chartsInstance[instanceKey].destroy();
-                chartsInstance[instanceKey] = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Memenuhi Syarat', 'Tidak Memenuhi Syarat'],
-                        datasets: [{ data: [aman || 1, tidak], backgroundColor: ['#10b981', '#f43f5e'], borderWidth: 0 }]
-                    },
-                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#000000', font: { size: 11, weight: 'bold' } } } } }
+        function renderLabelTable() {
+            const tbody = document.getElementById('tableLabel');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            if(dbState.label.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500 font-medium">Belum ada data pengawasan label.</td></tr>`;
+                return;
+            }
+            dbState.label.forEach(item => {
+                let badgeClass = item.kesimpulan === 'Memenuhi Syarat' ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
+                let fotoHtml = '';
+                if(item.foto && item.foto.length > 0) {
+                    fotoHtml = `<div class="flex gap-1 flex-wrap">` + item.foto.map(f => `<img src="${f}" onclick="showPhotoModal('${f}')" class="w-10 h-10 object-cover rounded-lg border border-slate-300 cursor-pointer hover:scale-105 transition">`).join('') + `</div>`;
+                } else {
+                    fotoHtml = `<span class="text-xs text-slate-400">Tidak ada foto</span>`;
+                }
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50/80 transition">
+                        <td class="p-4">
+                            <div class="font-bold text-slate-950">${item.petugas}</div>
+                            <div class="text-xs text-slate-500">${item.tanggal}</div>
+                        </td>
+                        <td class="p-4">
+                            <div class="font-bold text-slate-950">${item.namaDagang}</div>
+                            <div class="text-xs text-slate-600">${item.namaProdusen}</div>
+                        </td>
+                        <td class="p-4">
+                            <div class="font-semibold text-slate-950">${item.lokasi}</div>
+                            <div class="text-xs text-emerald-700 font-semibold">${item.kecamatan}</div>
+                        </td>
+                        <td class="p-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeClass}">${item.kesimpulan}</span>
+                        </td>
+                        <td class="p-4">${fotoHtml}</td>
+                        <td class="p-4 text-right space-x-2">
+                            <button onclick="openModal('label', '${item.id}')" class="p-2 rounded-xl bg-amber-100 text-amber-800 hover:bg-amber-200 transition" title="Edit"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
+                            <button onclick="deleteData('label', '${item.id}')" class="p-2 rounded-xl bg-rose-100 text-rose-800 hover:bg-rose-200 transition" title="Hapus"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function renderPestisidaTable() {
+            const tbody = document.getElementById('tablePestisida');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            if(dbState.pestisida.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500 font-medium">Belum ada data pengujian pestisida.</td></tr>`;
+                return;
+            }
+            dbState.pestisida.forEach(item => {
+                let badgeClass = item.kesimpulan === 'Memenuhi Syarat' ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
+                let fotoHtml = '';
+                if(item.foto && item.foto.length > 0) {
+                    fotoHtml = `<div class="flex gap-1 flex-wrap">` + item.foto.map(f => `<img src="${f}" onclick="showPhotoModal('${f}')" class="w-10 h-10 object-cover rounded-lg border border-slate-300 cursor-pointer hover:scale-105 transition">`).join('') + `</div>`;
+                } else {
+                    fotoHtml = `<span class="text-xs text-slate-400">Tidak ada foto</span>`;
+                }
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50/80 transition">
+                        <td class="p-4">
+                            <div class="font-bold text-slate-950">${item.komoditas}</div>
+                            <div class="text-xs text-slate-600">${item.jenisPsat}</div>
+                        </td>
+                        <td class="p-4">
+                            <div class="font-semibold text-slate-950">${item.lokasi}</div>
+                            <div class="text-xs text-emerald-700 font-semibold">${item.kecamatan}</div>
+                        </td>
+                        <td class="p-4">
+                            <span class="font-bold text-slate-900">${item.hasilUji}</span>
+                            <div class="text-xs text-slate-500">${item.jenisTest}</div>
+                        </td>
+                        <td class="p-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeClass}">${item.kesimpulan}</span>
+                        </td>
+                        <td class="p-4">${fotoHtml}</td>
+                        <td class="p-4 text-right space-x-2">
+                            <button onclick="openModal('pestisida', '${item.id}')" class="p-2 rounded-xl bg-amber-100 text-amber-800 hover:bg-amber-200 transition" title="Edit"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
+                            <button onclick="deleteData('pestisida', '${item.id}')" class="p-2 rounded-xl bg-rose-100 text-rose-800 hover:bg-rose-200 transition" title="Hapus"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function renderSppgTable() {
+            const tbody = document.getElementById('tableSppg');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            if(dbState.sppg.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-500 font-medium">Belum ada data pengawasan SPPG.</td></tr>`;
+                return;
+            }
+            dbState.sppg.forEach(item => {
+                let badgeClass = item.kesimpulan === 'Memenuhi Syarat' ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
+                let fotoHtml = '';
+                if(item.foto && item.foto.length > 0) {
+                    fotoHtml = `<div class="flex gap-1 flex-wrap">` + item.foto.map(f => `<img src="${f}" onclick="showPhotoModal('${f}')" class="w-10 h-10 object-cover rounded-lg border border-slate-300 cursor-pointer hover:scale-105 transition">`).join('') + `</div>`;
+                } else {
+                    fotoHtml = `<span class="text-xs text-slate-400">Tidak ada foto</span>`;
+                }
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50/80 transition">
+                        <td class="p-4">
+                            <div class="font-bold text-slate-950">${item.petugas}</div>
+                            <div class="text-xs text-slate-500">${item.tanggal}</div>
+                        </td>
+                        <td class="p-4">
+                            <div class="font-bold text-slate-950">${item.lokasi}</div>
+                            <div class="text-xs text-emerald-700 font-semibold">${item.kecamatan}</div>
+                        </td>
+                        <td class="p-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeClass}">${item.kesimpulan}</span>
+                        </td>
+                        <td class="p-4">${fotoHtml}</td>
+                        <td class="p-4 text-right space-x-2">
+                            <button onclick="openModal('sppg', '${item.id}')" class="p-2 rounded-xl bg-amber-100 text-amber-800 hover:bg-amber-200 transition" title="Edit"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
+                            <button onclick="deleteData('sppg', '${item.id}')" class="p-2 rounded-xl bg-rose-100 text-rose-800 hover:bg-rose-200 transition" title="Hapus"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function renderRekapTable() {
+            const tbody = document.getElementById('tableRekap');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+
+            let allData = [
+                ...dbState.gudang.map(x => ({...x, displayModule: 'Gudang PSAT'})),
+                ...dbState.label.map(x => ({...x, displayModule: 'Pengawasan Label', lokasi: x.namaDagang + ' (' + x.lokasi + ')'})),
+                ...dbState.pestisida.map(x => ({...x, displayModule: 'Pengujian Pestisida', lokasi: x.komoditas + ' (' + x.lokasi + ')'})),
+                ...dbState.sppg.map(x => ({...x, displayModule: 'Pengawasan SPPG'}))
+            ];
+
+            if(allData.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500 font-medium">Belum ada rekapitulasi data pengawasan.</td></tr>`;
+                return;
+            }
+
+            allData.sort((a,b) => new Date(b.tanggal) - new Date(a.tanggal));
+
+            allData.forEach(item => {
+                let badgeClass = item.kesimpulan === 'Memenuhi Syarat' ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
+                let fotoHtml = '';
+                if(item.foto && item.foto.length > 0) {
+                    fotoHtml = `<div class="flex gap-1 flex-wrap">` + item.foto.map(f => `<img src="${f}" onclick="showPhotoModal('${f}')" class="w-10 h-10 object-cover rounded-lg border border-slate-300 cursor-pointer hover:scale-105 transition">`).join('') + `</div>`;
+                } else {
+                    fotoHtml = `<span class="text-xs text-slate-400">-</span>`;
+                }
+
+                tbody.innerHTML += `
+                    <tr class="rekap-row hover:bg-slate-50/80 transition" data-search="${(item.petugas + ' ' + item.lokasi + ' ' + item.kecamatan + ' ' + item.kesimpulan + ' ' + item.displayModule).toLowerCase()}" data-kecamatan="${item.kecamatan}">
+                        <td class="p-4 font-bold text-emerald-700">${item.displayModule}</td>
+                        <td class="p-4">
+                            <div class="font-bold text-slate-950">${item.petugas}</div>
+                            <div class="text-xs text-slate-500">${item.tanggal}</div>
+                        </td>
+                        <td class="p-4 font-semibold text-slate-950">${item.lokasi}</td>
+                        <td class="p-4 text-emerald-700 font-semibold">${item.kecamatan}</td>
+                        <td class="p-4"><span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeClass}">${item.kesimpulan}</span></td>
+                        <td class="p-4">${fotoHtml}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function filterRekapTable() {
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+            const kecVal = document.getElementById('filterKecamatan').value;
+            const rows = document.querySelectorAll('.rekap-row');
+
+            rows.forEach(row => {
+                const text = row.dataset.search;
+                const kec = row.dataset.kecamatan;
+
+                const matchSearch = text.includes(searchVal);
+                const matchKec = !kecVal || kec === kecVal;
+
+                if(matchSearch && matchKec) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function renderStats() {
+            const totalGudang = dbState.gudang.length;
+            const totalLabel = dbState.label.length;
+            const totalPestisida = dbState.pestisida.length;
+            const totalSppg = dbState.sppg.length;
+            const totalAll = totalGudang + totalLabel + totalPestisida + totalSppg;
+
+            let amanAll = 0;
+            let tidakAmanAll = 0;
+
+            const countAmanTidak = (arr) => {
+                arr.forEach(i => {
+                    if(i.kesimpulan === 'Memenuhi Syarat') amanAll++;
+                    else tidakAmanAll++;
                 });
             };
 
-            createPie('pieChartGudang', dbState.gudang, 'pieGudang');
-            createPie('pieChartPestisida', dbState.pestisida, 'piePestisida');
-            createPie('pieChartSppg', dbState.sppg, 'pieSppg');
+            countAmanTidak(dbState.gudang);
+            countAmanTidak(dbState.label);
+            countAmanTidak(dbState.pestisida);
+            countAmanTidak(dbState.sppg);
 
-            const ctxBar = document.getElementById('barChart').getContext('2d');
+            const percentAman = totalAll > 0 ? Math.round((amanAll / totalAll) * 100) : 0;
+            const percentTidakAman = totalAll > 0 ? Math.round((tidakAmanAll / totalAll) * 100) : 0;
+
+            document.getElementById('statTotal').innerText = totalAll;
+            document.getElementById('statAman').innerText = amanAll;
+            document.getElementById('statTidakAman').innerText = tidakAmanAll;
+            document.getElementById('percentAman').innerText = percentAman + '%';
+            document.getElementById('percentTidakAman').innerText = percentTidakAman + '%';
+
+            // Hitung fokus wilayah terbanyak
+            const kecCounts = {};
+            const allItems = [...dbState.gudang, ...dbState.label, ...dbState.pestisida, ...dbState.sppg];
+            allItems.forEach(i => {
+                if(i.kecamatan) {
+                    kecCounts[i.kecamatan] = (kecCounts[i.kecamatan] || 0) + 1;
+                }
+            });
+
+            let topKec = 'Sirimau';
+            let maxCount = -1;
+            for(let kec in kecCounts) {
+                if(kecCounts[kec] > maxCount) {
+                    maxCount = kecCounts[kec];
+                    topKec = kec;
+                }
+            }
+            document.getElementById('statFokusWilayah').innerText = topKec;
+        }
+
+        function renderCharts() {
+            // Chart Gudang
+            const gudangAman = dbState.gudang.filter(x => x.kesimpulan === 'Memenuhi Syarat').length;
+            const gudangTidak = dbState.gudang.filter(x => x.kesimpulan === 'Tidak Memenuhi Syarat').length;
+            if(chartsInstance.pieGudang) chartsInstance.pieGudang.destroy();
+            chartsInstance.pieGudang = new Chart(document.getElementById('pieChartGudang'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Memenuhi Syarat', 'Tidak Memenuhi Syarat'],
+                    datasets: [{ data: [gudangAman, gudangTidak], backgroundColor: ['#10b981', '#f43f5e'] }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } } }
+            });
+
+            // Chart Label
+            const labelAman = dbState.label.filter(x => x.kesimpulan === 'Memenuhi Syarat').length;
+            const labelTidak = dbState.label.filter(x => x.kesimpulan === 'Tidak Memenuhi Syarat').length;
+            if(chartsInstance.pieLabel) chartsInstance.pieLabel.destroy();
+            chartsInstance.pieLabel = new Chart(document.getElementById('pieChartLabel'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Memenuhi Syarat', 'Tidak Memenuhi Syarat'],
+                    datasets: [{ data: [labelAman, labelTidak], backgroundColor: ['#10b981', '#f43f5e'] }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } } }
+            });
+
+            // Chart Pestisida
+            const pestAman = dbState.pestisida.filter(x => x.kesimpulan === 'Memenuhi Syarat').length;
+            const pestTidak = dbState.pestisida.filter(x => x.kesimpulan === 'Tidak Memenuhi Syarat').length;
+            if(chartsInstance.piePestisida) chartsInstance.piePestisida.destroy();
+            chartsInstance.piePestisida = new Chart(document.getElementById('pieChartPestisida'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Memenuhi Syarat', 'Tidak Memenuhi Syarat'],
+                    datasets: [{ data: [pestAman, pestTidak], backgroundColor: ['#10b981', '#f43f5e'] }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } } }
+            });
+
+            // Chart SPPG
+            const sppgAman = dbState.sppg.filter(x => x.kesimpulan === 'Memenuhi Syarat').length;
+            const sppgTidak = dbState.sppg.filter(x => x.kesimpulan === 'Tidak Memenuhi Syarat').length;
+            if(chartsInstance.pieSppg) chartsInstance.pieSppg.destroy();
+            chartsInstance.pieSppg = new Chart(document.getElementById('pieChartSppg'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Memenuhi Syarat', 'Tidak Memenuhi Syarat'],
+                    datasets: [{ data: [sppgAman, sppgTidak], backgroundColor: ['#10b981', '#f43f5e'] }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } } }
+            });
+
+            // Bar Chart
             if(chartsInstance.bar) chartsInstance.bar.destroy();
-            chartsInstance.bar = new Chart(ctxBar, {
+            chartsInstance.bar = new Chart(document.getElementById('barChart'), {
                 type: 'bar',
                 data: {
-                    labels: ['Gudang PSAT', 'Uji Pestisida', 'Pengawasan SPPG'],
-                    datasets: [{ label: 'Jumlah Pengawasan', data: [dbState.gudang.length, dbState.pestisida.length, dbState.sppg.length], backgroundColor: ['#059669', '#10b981', '#34d399'], borderRadius: 8 }]
+                    labels: ['Gudang PSAT', 'Pengawasan Label', 'Pengujian Pestisida', 'Pengawasan SPPG'],
+                    datasets: [{
+                        label: 'Jumlah Pengawasan',
+                        data: [dbState.gudang.length, dbState.label.length, dbState.pestisida.length, dbState.sppg.length],
+                        backgroundColor: '#059669',
+                        borderRadius: 8
+                    }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, grid: { color: '#cbd5e1' }, ticks: { color: '#000000', font: { weight: 'bold' } } }, x: { grid: { display: false }, ticks: { color: '#000000', font: { weight: 'bold' } } } }, plugins: { legend: { display: false } } }
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                }
             });
         }
-
-        function renderTableGudang() {
-            const tbody = document.getElementById('tableGudang');
-            tbody.innerHTML = dbState.gudang.length === 0 ? `<tr><td colspan="5" class="p-6 text-center text-slate-700 font-bold">Belum ada data pengawasan Gudang PSAT.</td></tr>` : '';
-            dbState.gudang.forEach(item => {
-                const photosHtml = item.foto.map(f => `<img src="${f}" onclick="showPhotoModal('${f}')" class="w-10 h-10 rounded-lg object-cover cursor-pointer border border-emerald-400 hover:scale-105 transition">`).join('');
-                tbody.innerHTML += `
-                    <tr class="hover:bg-slate-100 transition border-b border-slate-200">
-                        <td class="p-4"><div class="font-bold text-black">${item.petugas}</div><div class="text-xs text-slate-700 font-medium">${item.tanggal}</div></td>
-                        <td class="p-4"><div class="font-bold text-slate-900">${item.lokasi}</div><div class="text-xs text-emerald-700 font-bold">Kec. ${item.kecamatan}</div></td>
-                        <td class="p-4"><span class="px-3 py-1 rounded-full text-xs font-bold ${item.kesimpulan === 'Memenuhi Syarat' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">${item.kesimpulan}</span></td>
-                        <td class="p-4 flex items-center gap-1.5 flex-wrap">${photosHtml}</td>
-                        <td class="p-4 text-right">
-                            <div class="flex items-center justify-end gap-2">
-                                <button onclick="openModal('gudang', '${item.id}')" class="p-2 bg-slate-100 hover:bg-slate-200 text-amber-700 rounded-lg transition" title="Edit Data"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
-                                <button onclick="deleteItem('gudang', '${item.id}')" class="p-2 bg-slate-100 hover:bg-slate-200 text-rose-700 rounded-lg transition" title="Hapus Data"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-                            </div>
-                        </td>
-                    </tr>`;
-            });
-        }
-
-        function renderTablePestisida() {
-            const tbody = document.getElementById('tablePestisida');
-            tbody.innerHTML = dbState.pestisida.length === 0 ? `<tr><td colspan="6" class="p-6 text-center text-slate-700 font-bold">Belum ada data pengujian pestisida.</td></tr>` : '';
-            dbState.pestisida.forEach(item => {
-                const photosHtml = item.foto.map(f => `<img src="${f}" onclick="showPhotoModal('${f}')" class="w-10 h-10 rounded-lg object-cover cursor-pointer border border-emerald-400 hover:scale-105 transition">`).join('');
-                tbody.innerHTML += `
-                    <tr class="hover:bg-slate-100 transition border-b border-slate-200">
-                        <td class="p-4"><div class="font-bold text-black">${item.komoditas} <span class="text-xs text-emerald-700 font-bold">(${item.jenisPsat})</span></div><div class="text-xs text-slate-700 font-medium">${item.jenisTest}</div></td>
-                        <td class="p-4"><div class="font-bold text-slate-900">${item.lokasi}</div><div class="text-xs text-emerald-700 font-bold">Kec. ${item.kecamatan}</div></td>
-                        <td class="p-4"><span class="font-black ${item.hasilUji === 'Negatif' ? 'text-emerald-700' : 'text-amber-700'}">${item.hasilUji}</span></td>
-                        <td class="p-4"><span class="px-3 py-1 rounded-full text-xs font-bold ${item.kesimpulan === 'Memenuhi Syarat' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">${item.kesimpulan}</span></td>
-                        <td class="p-4 flex items-center gap-1.5 flex-wrap">${photosHtml}</td>
-                        <td class="p-4 text-right">
-                            <div class="flex items-center justify-end gap-2">
-                                <button onclick="openModal('pestisida', '${item.id}')" class="p-2 bg-slate-100 hover:bg-slate-200 text-amber-700 rounded-lg transition" title="Edit Data"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
-                                <button onclick="deleteItem('pestisida', '${item.id}')" class="p-2 bg-slate-100 hover:bg-slate-200 text-rose-700 rounded-lg transition" title="Hapus Data"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-                            </div>
-                        </td>
-                    </tr>`;
-            });
-        }
-
-        function renderTableSppg() {
-            const tbody = document.getElementById('tableSppg');
-            tbody.innerHTML = dbState.sppg.length === 0 ? `<tr><td colspan="5" class="p-6 text-center text-slate-700 font-bold">Belum ada data pengawasan SPPG.</td></tr>` : '';
-            dbState.sppg.forEach(item => {
-                const photosHtml = item.foto.map(f => `<img src="${f}" onclick="showPhotoModal('${f}')" class="w-10 h-10 rounded-lg object-cover cursor-pointer border border-emerald-400 hover:scale-105 transition">`).join('');
-                tbody.innerHTML += `
-                    <tr class="hover:bg-slate-100 transition border-b border-slate-200">
-                        <td class="p-4"><div class="font-bold text-black">${item.petugas}</div><div class="text-xs text-slate-700 font-medium">${item.tanggal}</div></td>
-                        <td class="p-4"><div class="font-bold text-slate-900">${item.lokasi}</div><div class="text-xs text-emerald-700 font-bold">Kec. ${item.kecamatan}</div></td>
-                        <td class="p-4"><span class="px-3 py-1 rounded-full text-xs font-bold ${item.kesimpulan === 'Memenuhi Syarat' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">${item.kesimpulan}</span></td>
-                        <td class="p-4 flex items-center gap-1.5 flex-wrap">${photosHtml}</td>
-                        <td class="p-4 text-right">
-                            <div class="flex items-center justify-end gap-2">
-                                <button onclick="openModal('sppg', '${item.id}')" class="p-2 bg-slate-100 hover:bg-slate-200 text-amber-700 rounded-lg transition" title="Edit Data"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
-                                <button onclick="deleteItem('sppg', '${item.id}')" class="p-2 bg-slate-100 hover:bg-slate-200 text-rose-700 rounded-lg transition" title="Hapus Data"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-                            </div>
-                        </td>
-                    </tr>`;
-            });
-        }
-
-        function renderTableRekap() {
-            const tbody = document.getElementById('tableRekap');
-            const searchVal = document.getElementById('searchInput').value.toLowerCase();
-            const filterKec = document.getElementById('filterKecamatan').value;
-
-            let allRows = [];
-            dbState.gudang.forEach(x => allRows.push({ ...x, modul: 'Gudang PSAT', displayKomoditas: x.lokasi }));
-            dbState.pestisida.forEach(x => allRows.push({ ...x, modul: 'Uji Pestisida', displayKomoditas: `${x.komoditas} (${x.jenisPsat})` }));
-            dbState.sppg.forEach(x => allRows.push({ ...x, modul: 'Pengawasan SPPG', displayKomoditas: x.lokasi }));
-
-            const filtered = allRows.filter(item => {
-                const matchSearch = (item.petugas + item.lokasi + item.kecamatan + item.modul + (item.komoditas || '')).toLowerCase().includes(searchVal);
-                const matchKec = filterKec === '' || item.kecamatan === filterKec;
-                return matchSearch && matchKec;
-            });
-
-            tbody.innerHTML = filtered.length === 0 ? `<tr><td colspan="6" class="p-6 text-center text-slate-700 font-bold">Tidak ada data rekapitulasi yang cocok.</td></tr>` : '';
-            filtered.forEach(item => {
-                const photosHtml = item.foto.map(f => `<img src="${f}" onclick="showPhotoModal('${f}')" class="w-9 h-9 rounded-lg object-cover cursor-pointer border border-emerald-400 hover:scale-105 transition">`).join('');
-                tbody.innerHTML += `
-                    <tr class="hover:bg-slate-100 transition border-b border-slate-200">
-                        <td class="p-4"><span class="px-2.5 py-1 rounded-lg text-xs font-black bg-slate-200 text-slate-900">${item.modul}</span></td>
-                        <td class="p-4"><div class="font-bold text-black">${item.petugas}</div><div class="text-xs text-slate-700 font-medium">${item.tanggal}</div></td>
-                        <td class="p-4"><div class="font-bold text-slate-900">${item.displayKomoditas}</div></td>
-                        <td class="p-4"><span class="text-xs font-bold text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-md">Kec. ${item.kecamatan}</span></td>
-                        <td class="p-4"><span class="px-3 py-1 rounded-full text-xs font-bold ${item.kesimpulan === 'Memenuhi Syarat' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">${item.kesimpulan}</span></td>
-                        <td class="p-4 flex items-center gap-1.5 flex-wrap">${photosHtml}</td>
-                    </tr>`;
-            });
-        }
-
-       function filterRekapTable() {
-        renderTableRekap();
-    }
-</script>
-<script> 
+    </script>
+	<script> 
     const slides = document.querySelectorAll('.bg-slider');
     let currentSlide = 0;
 
