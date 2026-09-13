@@ -1263,7 +1263,10 @@
             updateAdminUI();
             renderAll();
             fetchDataFromGoogleSheet(); // Auto tarik data dari Spreadsheet agar perangkat manapun selalu terupdate
-        });
+    setInterval(() => {
+        fetchDataFromGoogleSheet();
+    }, 10000); // Otomatis cek data baru setiap 10 detik
+});
 
         // Fungsi tambahan aman untuk menarik data dari Spreadsheet secara otomatis lintas device
         async function fetchDataFromGoogleSheet() {
