@@ -1916,11 +1916,13 @@
             const tbody = document.getElementById('tablePestisida');
             if(!tbody) return;
             tbody.innerHTML = '';
-            if(dbState.pestisida.length === 0) {
+            if( !dbState.pestisida || dbState.pestisida.length <= 1) {
                 tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500 font-medium">Belum ada data pengujian pestisida.</td></tr>`;
                 return;
             }
-            dbState.pestisida.forEach(item => {
+
+            const rows = dbState.pestisida.slice(1);
+            rows.forEach(item => {
                 const id = item[0];
         const lokasi = item[3];
         const kecamatan = item[4];
