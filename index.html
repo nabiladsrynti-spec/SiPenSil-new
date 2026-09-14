@@ -122,7 +122,7 @@
         <section id="tab-dashboard" class="tab-content space-y-8">
             <div class="bg-gradient-to-r from-emerald-100 via-[#FAF9F6] to-white p-6 sm:p-8 rounded-3xl border border-emerald-300 shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
                 <div>
-                    <span class="text-xs uppercase tracking-widest text-emerald-800 font-bold bg-emerald-200/60 px-3 py-1 rounded-full border border-emerald-300">Sistem Pendataan Hasil Pengawasan Keamanan PSAT</span>
+                    <span class="text-xs uppercase tracking-widest text-emerald-800 font-bold bg-emerald-200/60 px-3 py-1 rounded-full border border-emerald-300">Sistem Pendataan Hasil</span>
                     <h2 class="text-2xl sm:text-3xl font-bold text-slate-950 mt-3">Pengawasan Keamanan PSAT Kota Ambon</h2>
                     <p class="text-slate-900 text-sm mt-2 max-w-2xl font-medium">Dashboard hasil pengawasan Gudang PSAT, Pengawasan Label PSAT, Pengujian Pestisida Rapid Test, dan SPPG di wilayah Kota Ambon.</p>
                 </div>
@@ -1278,7 +1278,7 @@
                 if(result && result.status === 'success' && result.data) {
                     if(result.data.gudang) { dbState.gudang = result.data.gudang; localStorage.setItem('sipensil_gudang', JSON.stringify(dbState.gudang)); }
                     if(result.data.label) { dbState.label = result.data.label; localStorage.setItem('sipensil_label', JSON.stringify(dbState.label)); }
-                    if(result.data.Pestisida) { dbState.pestisida = result.data.Pestisida; localStorage.setItem('sipensil_pestisida', JSON.stringify(dbState.pestisida)); }
+                    if(result.data.pestisida) { dbState.pestisida = result.data.pestisida; localStorage.setItem('sipensil_pestisida', JSON.stringify(dbState.pestisida)); }
                     if(result.data.sppg) { dbState.sppg = result.data.sppg; localStorage.setItem('sipensil_sppg', JSON.stringify(dbState.sppg)); }
                     renderAll();
                 }
@@ -1914,7 +1914,6 @@
         function renderPestisidaTable() {
             const tbody = document.getElementById('tablePestisida');
             if(!tbody) return;
-			console.log(dbState.pestisida);
             tbody.innerHTML = '';
             if(dbState.pestisida.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500 font-medium">Belum ada data pengujian pestisida.</td></tr>`;
@@ -2180,6 +2179,70 @@
             });
         }
     </script>
+<script>
+/* === REALTIME SYNC PATCH ===
+   Memastikan data dari Google Apps Script/Spreadsheet selalu diperbarui
+   ketika website dibuka dari perangkat berbeda.
+*/
+(function(){
+    const oldFetch = window.fetchDataFromGoogleSheet;
+
+    if (typeof oldFetch === "function") {
+        window.fetchDataFromGoogleSheet = async function(){
+            const scriptUrl = dbState.settings.scriptUrl;
+            if(!scriptUrl) return;
+
+            try {
+                const realtimeUrl = scriptUrl + (scriptUrl.includes("?") ? "&" : "?") + "t=" + Date.now();
+                const response = await fetch(realtimeUrl, {
+                    method: "GET",
+                    cache: "no-store"
+                });
+
+                const result = await response.json();
+
+                if(result && result.status === "success" && result.data){
+                    if(result.data.gudang){
+                        dbState.gudang = result.data.gudang;
+                        localStorage.setItem("sipensil_gudang", JSON.stringify(dbState.gudang));
+                    }
+                    if(result.data.label){
+                        dbState.label = result.data.label;
+                        localStorage.setItem("sipensil_label", JSON.stringify(dbState.label));
+                    }
+                    if(result.data.pestisida){
+                        dbState.pestisida = result.data.pestisida;
+                        localStorage.setItem("sipensil_pestisida", JSON.stringify(dbState.pestisida));
+                    }
+                    if(result.data.sppg){
+                        dbState.sppg = result.data.sppg;
+                        localStorage.setItem("sipensil_sppg", JSON.stringify(dbState.sppg));
+                    }
+
+                    renderAll();
+                }
+            }catch(err){
+                console.log("Realtime sync menunggu koneksi/API:", err);
+            }
+        };
+
+        setInterval(() => {
+            window.fetchDataFromGoogleSheet();
+        }, 5000);
+
+        document.addEventListener("visibilitychange", () => {
+            if(!document.hidden){
+                window.fetchDataFromGoogleSheet();
+            }
+        });
+
+        window.addEventListener("online", () => {
+            window.fetchDataFromGoogleSheet();
+        });
+    }
+})();
+</script>
+
 	<script> 
     const slides = document.querySelectorAll('.bg-slider');
     let currentSlide = 0;
