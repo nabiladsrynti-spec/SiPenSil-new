@@ -1532,21 +1532,20 @@
                     const item = dbState.pestisida.find(data => {
         return Array.isArray(data) ? data[0] === id : data.id === id;
     });
-                    console.log(item);
                     if(item) {
-                        document.getElementById('pestisidaId').value = item.id;
+                        document.getElementById('pestisidaId').value = item[0];
                         document.getElementById('titleModalPestisidaText').innerText = 'Edit Pengujian Pestisida / Rapid Test';
-                        document.getElementById('pestisidaPetugas').value = item.petugas || '';
-                        document.getElementById('pestisidaTanggal').value = item.tanggal || '';
-                        document.getElementById('pestisidaLokasi').value = item.lokasi || '';
-                        document.getElementById('pestisidaKecamatan').value = item.kecamatan || 'Sirimau';
-                        document.getElementById('pestisidaJenisPsat').value = item.jenisPsat || 'Bawang';
-                        document.getElementById('pestisidaKomoditas').value = item.komoditas || '';
-						document.getElementById('pestisidaAsal').value = item.asalKomoditas || '';
-                        document.getElementById('pestisidaJenisTest').value = item.jenisTest || 'Rapid Test Pestisida';
-                        document.getElementById('pestisidaHasilUji').value = item.hasilUji || 'Negatif';
-                        document.getElementById('pestisidaKesimpulan').value = item.kesimpulan || 'Memenuhi Syarat';
-                        document.getElementById('pestisidaCatatan').value = item.catatan || '';
+                        document.getElementById('pestisidaPetugas').value = item[2] || '';
+                        document.getElementById('pestisidaTanggal').value = item[1] || '';
+                        document.getElementById('pestisidaLokasi').value = item[3] || '';
+                        document.getElementById('pestisidaKecamatan').value = item[4] || 'Sirimau';
+                        document.getElementById('pestisidaJenisPsat').value = item[5] || 'Bawang';
+                        document.getElementById('pestisidaKomoditas').value = item[6] || '';
+						document.getElementById('pestisidaAsal').value = item[7] || '';
+                        document.getElementById('pestisidaJenisTest').value = item[8] || 'Rapid Test Pestisida';
+                        document.getElementById('pestisidaHasilUji').value = item[9] || 'Negatif';
+                        document.getElementById('pestisidaKesimpulan').value = item[10] || 'Memenuhi Syarat';
+                        document.getElementById('pestisidaCatatan').value = item[11] || '';
                     }
                 }
                 document.getElementById('modalPestisida').classList.remove('hidden');
