@@ -1924,8 +1924,8 @@
             pestisidaData.forEach(item => {
                 let badgeClass = item[10] === 'Memenuhi Syarat' ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
                 let fotoHtml = '';
-                if(item[12] && item[12].length > 0) {
-                    fotoHtml = `<div class="flex gap-1 flex-wrap">` + item[12].map(f => `<img src="${f}" onclick="showPhotoModal('${f}')" class="w-10 h-10 object-cover rounded-lg border border-slate-300 cursor-pointer hover:scale-105 transition">`).join('') + `</div>`;
+                if(item.foto && item.foto.length > 0) {
+                    fotoHtml = `<div class="flex gap-1 flex-wrap">` + item.foto.map(f => `<img src="${f}" onclick="showPhotoModal('${f}')" class="w-10 h-10 object-cover rounded-lg border border-slate-300 cursor-pointer hover:scale-105 transition">`).join('') + `</div>`;
                 } else {
                     fotoHtml = `<span class="text-xs text-slate-400">Tidak ada foto</span>`;
                 }
