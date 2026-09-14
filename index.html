@@ -1916,11 +1916,12 @@
             const tbody = document.getElementById('tablePestisida');
             if(!tbody) return;
             tbody.innerHTML = '';
-            if(dbState.pestisida.length === 0) {
+            if( !dbState.pestisida || dbState.pestisida.length <= 1 ) {
                 tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500 font-medium">Belum ada data pengujian pestisida.</td></tr>`;
                 return;
             }
-            dbState.pestisida.forEach(item => {
+            const pestisidaData = dbState.pestisida.slice(1);
+            pestisidaData.forEach(item => {
                 let badgeClass = item.kesimpulan === 'Memenuhi Syarat' ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
                 let fotoHtml = '';
                 if(item.foto && item.foto.length > 0) {
@@ -1936,20 +1937,20 @@
                             <div class="text-xs text-slate-600">${item[5]}</div>
                         </td>
                         <td class="p-4">
-                            <div class="font-semibold text-slate-950">${item.lokasi}</div>
-                            <div class="text-xs text-emerald-700 font-semibold">${item.kecamatan}</div>
+                            <div class="font-semibold text-slate-950">${item[3]}</div>
+                            <div class="text-xs text-emerald-700 font-semibold">${item[4]}</div>
                         </td>
                         <td class="p-4">
-                            <span class="font-bold text-slate-900">${item.hasilUji}</span>
-                            <div class="text-xs text-slate-500">${item.jenisTest}</div>
+                            <span class="font-bold text-slate-900">${item[9]}</span>
+                            <div class="text-xs text-slate-500">${item[8]}</div>
                         </td>
                         <td class="p-4">
-                            <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeClass}">${item.kesimpulan}</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeClass}">${item[10]}</span>
                         </td>
                         <td class="p-4">${fotoHtml}</td>
                         <td class="p-4 text-right space-x-2">
-                            <button onclick="openModal('pestisida', '${item.id}')" class="p-2 rounded-xl bg-amber-100 text-amber-800 hover:bg-amber-200 transition" title="Edit"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
-                            <button onclick="deleteData('pestisida', '${item.id}')" class="p-2 rounded-xl bg-rose-100 text-rose-800 hover:bg-rose-200 transition" title="Hapus"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                            <button onclick="openModal('pestisida', '${item[0]}')" class="p-2 rounded-xl bg-amber-100 text-amber-800 hover:bg-amber-200 transition" title="Edit"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
+                            <button onclick="deleteData('pestisida', '${item[0]}')" class="p-2 rounded-xl bg-rose-100 text-rose-800 hover:bg-rose-200 transition" title="Hapus"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                         </td>
                     </tr>
                 `;
