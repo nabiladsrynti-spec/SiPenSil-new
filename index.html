@@ -1914,6 +1914,7 @@
         function renderPestisidaTable() {
             const tbody = document.getElementById('tablePestisida');
             if(!tbody) return;
+            console.log(dbState.pestisida);
             tbody.innerHTML = '';
             if(dbState.pestisida.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500 font-medium">Belum ada data pengujian pestisida.</td></tr>`;
