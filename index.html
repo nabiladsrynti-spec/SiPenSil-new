@@ -1529,7 +1529,9 @@
                 document.getElementById('pestisidaTanggal').value = new Date().toISOString().slice(0,10);
 
                 if(id) {
-                    const item = dbState.pestisida.find(x => x[0] === id);
+                    const item = dbState.pestisida.find(data => {
+        return Array.isArray(data) ? data[0] === id : data.id === id;
+    });
                     console.log(item);
                     if(item) {
                         document.getElementById('pestisidaId').value = item.id;
