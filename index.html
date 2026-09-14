@@ -1275,6 +1275,7 @@
             try {
                 const response = await fetch(scriptUrl);
                 const result = await response.json();
+                console.log(result.data);
                 if(result && result.status === 'success' && result.data) {
                     if(result.data.gudang) { dbState.gudang = result.data.gudang; localStorage.setItem('sipensil_gudang', JSON.stringify(dbState.gudang)); }
                     if(result.data.label) { dbState.label = result.data.label; localStorage.setItem('sipensil_label', JSON.stringify(dbState.label)); }
