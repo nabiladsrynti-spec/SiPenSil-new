@@ -1921,10 +1921,20 @@
                 return;
             }
             dbState.pestisida.forEach(item => {
-                let badgeClass = item.kesimpulan === 'Memenuhi Syarat' ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
+                const id = item[0];
+        const lokasi = item[3];
+        const kecamatan = item[4];
+        const jenisPsat = item[5];
+        const komoditas = item[6];
+        const jenisTest = item[7];
+        const hasilUji = item[8];
+        const kesimpulan = item[9];
+        const fotoData = item[10];
+
+                let badgeClass = kesimpulan === 'Memenuhi Syarat' ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
                 let fotoHtml = '';
-                if(item.foto && item.foto.length > 0) {
-                    fotoHtml = `<div class="flex gap-1 flex-wrap">` + item.foto.map(f => `<img src="${f}" onclick="showPhotoModal('${f}')" class="w-10 h-10 object-cover rounded-lg border border-slate-300 cursor-pointer hover:scale-105 transition">`).join('') + `</div>`;
+                if(fotoData && fotoData.length > 0) {
+                    fotoHtml = `<div class="flex gap-1 flex-wrap">` + fotoData.map(f => `<img src="${f}" onclick="showPhotoModal('${f}')" class="w-10 h-10 object-cover rounded-lg border border-slate-300 cursor-pointer hover:scale-105 transition">`).join('') + `</div>`;
                 } else {
                     fotoHtml = `<span class="text-xs text-slate-400">Tidak ada foto</span>`;
                 }
@@ -1932,24 +1942,24 @@
                 tbody.innerHTML += `
                     <tr class="hover:bg-slate-50/80 transition">
                         <td class="p-4">
-                            <div class="font-bold text-slate-950">${item[6]}</div>
-                            <div class="text-xs text-slate-600">${item[5]}</div>
+                            <div class="font-bold text-slate-950">${komoditas}</div>
+                            <div class="text-xs text-slate-600">${jenisPsat}</div>
                         </td>
                         <td class="p-4">
-                            <div class="font-semibold text-slate-950">${item.lokasi}</div>
-                            <div class="text-xs text-emerald-700 font-semibold">${item.kecamatan}</div>
+                            <div class="font-semibold text-slate-950">${lokasi}</div>
+                            <div class="text-xs text-emerald-700 font-semibold">${kecamatan}</div>
                         </td>
                         <td class="p-4">
-                            <span class="font-bold text-slate-900">${item.hasilUji}</span>
-                            <div class="text-xs text-slate-500">${item.jenisTest}</div>
+                            <span class="font-bold text-slate-900">${hasilUji}</span>
+                            <div class="text-xs text-slate-500">${jenisTest}</div>
                         </td>
                         <td class="p-4">
-                            <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeClass}">${item.kesimpulan}</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold border ${badgeClass}">${kesimpulan}</span>
                         </td>
                         <td class="p-4">${fotoHtml}</td>
                         <td class="p-4 text-right space-x-2">
-                            <button onclick="openModal('pestisida', '${item.id}')" class="p-2 rounded-xl bg-amber-100 text-amber-800 hover:bg-amber-200 transition" title="Edit"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
-                            <button onclick="deleteData('pestisida', '${item.id}')" class="p-2 rounded-xl bg-rose-100 text-rose-800 hover:bg-rose-200 transition" title="Hapus"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                            <button onclick="openModal('pestisida', '${id}')" class="p-2 rounded-xl bg-amber-100 text-amber-800 hover:bg-amber-200 transition" title="Edit"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
+                            <button onclick="deleteData('pestisida', '${id}')" class="p-2 rounded-xl bg-rose-100 text-rose-800 hover:bg-rose-200 transition" title="Hapus"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                         </td>
                     </tr>
                 `;
