@@ -1282,7 +1282,6 @@
                     if(result.data.sppg) { dbState.sppg = result.data.sppg; localStorage.setItem('sipensil_sppg', JSON.stringify(dbState.sppg)); }
                     renderAll();
                 }
-				console.log("Ini Jadi");
             } catch (e) {
                 console.log("Menggunakan data lokal tersimpan (Offline/Belum ada koneksi API doGet).");
             }
