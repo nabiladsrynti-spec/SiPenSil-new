@@ -1528,9 +1528,9 @@
                 document.getElementById('titleModalPestisidaText').innerText = 'Form Pengujian Pestisida / Rapid Test';
                 document.getElementById('pestisidaTanggal').value = new Date().toISOString().slice(0,10);
 
-                console.log(id);
                 if(id) {
                     const item = dbState.pestisida.find(x => x.id === id);
+                    console.log(item);
                     if(item) {
                         document.getElementById('pestisidaId').value = item.id;
                         document.getElementById('titleModalPestisidaText').innerText = 'Edit Pengujian Pestisida / Rapid Test';
