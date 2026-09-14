@@ -1528,8 +1528,8 @@
                 document.getElementById('titleModalPestisidaText').innerText = 'Form Pengujian Pestisida / Rapid Test';
                 document.getElementById('pestisidaTanggal').value = new Date().toISOString().slice(0,10);
 
+                console.log(id);
                 if(id) {
-                    console.log(id);
                     const item = dbState.pestisida.find(x => x.id === id);
                     if(item) {
                         document.getElementById('pestisidaId').value = item.id;
