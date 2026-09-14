@@ -1278,7 +1278,7 @@
                 if(result && result.status === 'success' && result.data) {
                     if(result.data.gudang) { dbState.gudang = result.data.gudang; localStorage.setItem('sipensil_gudang', JSON.stringify(dbState.gudang)); }
                     if(result.data.label) { dbState.label = result.data.label; localStorage.setItem('sipensil_label', JSON.stringify(dbState.label)); }
-                    if(result.data.pestisida) { dbState.pestisida = result.data.pestisida; localStorage.setItem('sipensil_pestisida', JSON.stringify(dbState.pestisida)); }
+                    if(result.data.Pestisida) { dbState.Pestisida = result.data.Pestisida; localStorage.setItem('sipensil_pestisida', JSON.stringify(dbState.pestisida)); }
                     if(result.data.sppg) { dbState.sppg = result.data.sppg; localStorage.setItem('sipensil_sppg', JSON.stringify(dbState.sppg)); }
                     renderAll();
                 }
